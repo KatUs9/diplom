@@ -1,0 +1,17 @@
+{
+  "imports": {
+    "@deno/vite-plugin": "npm:@deno/vite-plugin@^1.0.4",
+    "esbuild": "npm:esbuild@^0.25.2",
+    "hono": "jsr:@hono/hono@^4.7.5",
+    "vite": "npm:vite@^6.2.4"
+  },
+  "tasks": {
+    "serve": "deno run -A --watch server/main.tsx & vite build --watch",
+    "build": "vite build"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx",
+    "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"]
+  }
+}
