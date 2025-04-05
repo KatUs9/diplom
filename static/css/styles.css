@@ -1,0 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --color-blue-500: rgba(81, 124, 179);
+  --color-white: rgba(255, 255, 255);
+  --color-black: rgba(0, 0, 0);
+}
+
+body {
+  font-family:
+    "Fira Sans",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    "Noto Sans",
+    "Liberation Sans",
+    Arial,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji";
+}
+
+#root {
+  background-color: var(--color-white);
+  color: var(--color-black);
+  width: 100%;
+  max-width: 82.5rem;
+  margin: 0 auto;
+  padding: 0 0.75rem;
+}
+
+header {
+  display: flex;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header_logo {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  color: var(--color-blue-500);
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+
+h1 ~ p {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.action_container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.action_container button, .action_container a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  max-width: 16.75rem;
+  width: 100%;
+  height: 3.25rem;
+
+  background-color: var(--color-blue-500);
+  color: var(--color-white);
+
+  font-size: 1.5rem;
+  font-weight: 500;
+}

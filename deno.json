@@ -1,13 +1,16 @@
 {
   "imports": {
     "@deno/vite-plugin": "npm:@deno/vite-plugin@^1.0.4",
+    "cheerio": "npm:cheerio@^1.0.0",
     "esbuild": "npm:esbuild@^0.25.2",
     "hono": "jsr:@hono/hono@^4.7.5",
     "vite": "npm:vite@^6.2.4"
   },
   "tasks": {
     "serve": "deno run -A --watch server/main.tsx & vite build --watch",
-    "build": "vite build"
+    "build": "vite build && deno task build:schedule",
+    "build:schedule": "deno run -A scripts/build-schedule.ts",
+    "start": "deno run -A server/main.tsx"
   },
   "compilerOptions": {
     "jsx": "react-jsx",
