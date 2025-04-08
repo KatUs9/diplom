@@ -1,20 +1,28 @@
 {
   "imports": {
     "@deno/vite-plugin": "npm:@deno/vite-plugin@^1.0.4",
+    "@tauri-apps/cli": "npm:@tauri-apps/cli@^2.4.1",
     "cheerio": "npm:cheerio@^1.0.0",
     "esbuild": "npm:esbuild@^0.25.2",
     "hono": "jsr:@hono/hono@^4.7.5",
     "vite": "npm:vite@^6.2.4"
   },
   "tasks": {
-    "serve": "deno run -A --watch server/main.tsx & vite build --watch",
-    "build": "vite build && deno task build:schedule",
+    "dev:server": "deno run -A --watch server/main.tsx & deno task build:ui --watch",
+    "dev:desktop": "tauri dev",
+    "build:server": "vite build && deno task build:schedule",
     "build:schedule": "deno run -A scripts/build-schedule.ts",
-    "start": "deno run -A server/main.tsx"
+    "build:desktop": "deno compile -A desktop/main.ts",
+    "build:ui": "vite build --config vite.config.ui.ts",
+    "start:server": "deno run -A server/main.tsx",
+    "start:desktop": "deno run -A desktop/main.ts",
+    "tauri": "tauri",
+    "vite": "vite"
   },
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
     "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"]
-  }
+  },
+  "nodeModulesDir": "auto"
 }

@@ -7,9 +7,12 @@ export default defineConfig(() => ({
     jsx: "automatic" as const,
     jsxImportSource: "hono/jsx/dom",
   },
+  define: {
+    "__ENV__": JSON.stringify("web"),
+  },
   build: {
     rollupOptions: {
-      input: "./client/app.tsx",
+      input: "./ui/main.tsx",
       output: {
         entryFileNames: "bundle.js",
         dir: "./static/js",

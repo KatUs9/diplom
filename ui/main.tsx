@@ -23,7 +23,10 @@ function App() {
   return (
     <>
       <header>
-        <a href="https://www.smtu.ru/" class="header_logo">
+        <a
+          href={__ENV__ == "web" ? "https://www.smtu.ru/" : undefined}
+          class="header_logo"
+        >
           <img
             src="/favicon.svg"
             width="42"
