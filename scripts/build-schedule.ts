@@ -1,6 +1,15 @@
 import * as cheerio from "cheerio";
 import { cfg } from "../config.ts";
 
+export type Lesson = {
+  time: `${string}-${string}`;
+  week: "both" | "up" | "down";
+  group: number;
+  subject: string;
+  kind: "practice" | "lecture" | "lab";
+  teacher: string;
+};
+
 const WEBSITE_HOST = "https://www.smtu.ru";
 
 async function listSchedule() {
@@ -83,14 +92,16 @@ function transform(
             acc[building] ??= {};
             acc[building][audience] ??= [];
             acc[building][audience][i] ??= [];
-            acc[building][audience][i].push({
-              group,
-              subject,
-              kind,
-              teacher,
-              time,
-              week,
-            });
+            acc[building][audience][i].push(
+              {
+                group,
+                subject,
+                kind,
+                teacher,
+                time,
+                week,
+              } satisfies Lesson,
+            );
           }
         }
 

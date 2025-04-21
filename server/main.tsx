@@ -2,8 +2,11 @@ import { Hono } from "hono";
 import { serveStatic } from "hono/deno";
 import schedule from "../static/schedule.json" with { type: "json" };
 import { cfg } from "../config.ts";
+import { api } from "./api.ts";
 
 const app = new Hono();
+
+app.route("/api", api);
 
 app.get("*", serveStatic({ root: "./static" }));
 

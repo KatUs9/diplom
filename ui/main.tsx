@@ -1,11 +1,15 @@
 import { render, useState } from "hono/jsx/dom";
 import { z } from "zod";
+import { hc, InferResponseType } from "hono/client";
+import { type Api } from "../server/api.ts";
 
 addEventListener("load", async () => {
   if ("serviceWorker" in navigator) {
     await navigator.serviceWorker.register("/sw.js");
   }
 });
+
+const api = hc<Api>("/api");
 
 function readAudiences() {
   return z.record(z.array(z.string())).parse(
@@ -29,7 +33,20 @@ function today() {
 function App() {
   const audiences = readAudiences();
   const buildings = Object.keys(audiences);
-  const [selectedBuilding, setSelectedBuilding] = useState(buildings[0]);
+  const [building, setBuilding] = useState(buildings[0]);
+  const [audience, setAudience] = useState(
+    audiences[building][0],
+  );
+
+  const [schedule, setSchedule] = useState<
+    | null
+    | InferResponseType<typeof api.schedule.$get>
+  >(null);
+
+  const handleShow = async () => {
+    const res = await api.schedule.$get({ query: { audience, building } });
+    setSchedule(await res.json());
+  };
 
   return (
     <>
@@ -49,27 +66,72 @@ function App() {
           <span>СПбГМТУ</span>
         </a>
       </header>
+
       <main>
-        <h1>Расписание занятий</h1>
-        <p>Сегодня: {today()}</p>
-        <div>
-          <select
-            value={selectedBuilding}
-            onChange={(e) =>
-              setSelectedBuilding((e.target as HTMLSelectElement).value)}
-          >
-            {buildings.map((b) => <option value={b} key={b}>{b}</option>)}
-          </select>
-          <select>
-            {audiences[selectedBuilding].map((a) => (
-              <option value={a} key={a}>{a}</option>
-            ))}
-          </select>
-        </div>
-        <div class="action_container">
-          <a href="/schedule.json" download>Сохранить</a>
-          <button type="button">Показать</button>
-        </div>
+        {schedule == null
+          ? (
+            <>
+              <h1>Расписание занятий</h1>
+              <p>Сегодня: {today()}</p>
+              <div>
+                <select
+                  value={building}
+                  onChange={(e) =>
+                    setBuilding((e.target as HTMLSelectElement).value)}
+                >
+                  {buildings.map((b) => <option value={b} key={b}>{b}</option>)}
+                </select>
+                <select
+                  value={audience}
+                  onChange={(e) =>
+                    setAudience((e.target as HTMLSelectElement).value)}
+                >
+                  {audiences[building].map((a) => (
+                    <option value={a} key={a}>{a}</option>
+                  ))}
+                </select>
+              </div>
+              <div class="action_container">
+                <a href="/schedule.json" download>Сохранить</a>
+                <button type="button" onClick={handleShow}>
+                  Показать
+                </button>
+              </div>
+            </>
+          )
+          : (
+            <>
+              <h1>Расписание занятий аудитории {building}{audience}</h1>
+              <p>Сегодня: {today()}</p>
+
+              <div>
+                {schedule.map((day) => (
+                  <table>
+                    <thead>
+                      <tr>
+                        <td>Время</td>
+                        <td>Неделя</td>
+                        <td>Группа</td>
+                        <td>Предмет</td>
+                        <td>Преподаватель</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {day.map((l, i) => (
+                        <tr key={i}>
+                          <td>{l.time}</td>
+                          <td>{l.week}</td>
+                          <td>{l.group}</td>
+                          <td>{l.subject}</td>
+                          <td>{l.teacher}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                ))}
+              </div>
+            </>
+          )}
       </main>
     </>
   );
