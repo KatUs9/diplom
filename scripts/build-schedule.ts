@@ -1,4 +1,5 @@
 import * as cheerio from "cheerio";
+import { cfg } from "../config.ts";
 
 const WEBSITE_HOST = "https://www.smtu.ru";
 
@@ -35,21 +36,20 @@ function parse(schedules: (readonly [number, cheerio.CheerioAPI])[]) {
 
           const [start, end] = $(cols[0]).text().trim().split("-");
           const week = $(cols[1]).children().attr()?.["data-bs-title"];
-          const [building, classroom] = $(cols[2]).text().trim().split(" ");
+          const [building, audience] = $(cols[2]).text().trim().split(" ");
           const subject = $(cols[4]).children().first().text().trim();
           const kind = $(cols[4]).children("small").first().text().trim();
           const teacher = $(cols[5]).text().trim();
 
           return {
-            start,
-            end,
+            time: `${start}-${end}`,
             week: week == "Верхняя неделя"
               ? "up"
               : week == "Нижняя неделя"
               ? "down"
               : "both",
             building,
-            classroom,
+            audience,
             subject,
             kind: kind == "Практическое занятие"
               ? "practice"
@@ -64,41 +64,42 @@ function parse(schedules: (readonly [number, cheerio.CheerioAPI])[]) {
   );
 }
 
-function transform(ast: ReturnType<typeof parse>) {
-  const result: Record<string, Record<string, any[]>> = {};
-  const days = [
-    "Понедельник",
-    "Вторник",
-    "Среда",
-    "Четверг",
-    "Пятница",
-    "Суббота",
-  ];
+function transform(
+  ast: ReturnType<
+    typeof parse
+  >,
+) {
+  return {
+    ...ast.reduce(
+      (
+        acc,
+        [group, ...days],
+      ) => {
+        for (let i = 0; i < days.length; i++) {
+          for (const lesson of days[i]) {
+            const { building, audience, subject, kind, teacher, time, week } =
+              lesson;
 
-  for (const [group, ...dayLessons] of ast) {
-    dayLessons.forEach((day, dayIndex) => {
-      for (const lesson of day) {
-        const { building, classroom } = lesson;
-
-        if (!result[building]) {
-          result[building] = {};
+            acc[building] ??= {};
+            acc[building][audience] ??= [];
+            acc[building][audience][i] ??= [];
+            acc[building][audience][i].push({
+              group,
+              subject,
+              kind,
+              teacher,
+              time,
+              week,
+            });
+          }
         }
 
-        if (!result[building][classroom]) {
-          result[building][classroom] = [];
-        }
-
-        result[building][classroom].push({
-          ...lesson,
-          group,
-          day: days[dayIndex],
-          dayIndex,
-        });
-      }
-    });
-  }
-
-  return result;
+        return acc;
+      },
+      {} as Record<string, Record<string, unknown[][]>>,
+    ),
+    [cfg.schedule.prioritized_key_name]: cfg.schedule.computer_audiences,
+  };
 }
 
 const hrefs = await listSchedule();

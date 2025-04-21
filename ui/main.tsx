@@ -1,10 +1,17 @@
-import { render } from "hono/jsx/dom";
+import { render, useState } from "hono/jsx/dom";
+import { z } from "zod";
 
 addEventListener("load", async () => {
   if ("serviceWorker" in navigator) {
     await navigator.serviceWorker.register("/sw.js");
   }
 });
+
+function readAudiences() {
+  return z.record(z.array(z.string())).parse(
+    JSON.parse(document.getElementById("__AUDIENCES__")!.textContent!),
+  );
+}
 
 function today() {
   const now = new Date();
@@ -20,6 +27,10 @@ function today() {
 }
 
 function App() {
+  const audiences = readAudiences();
+  const buildings = Object.keys(audiences);
+  const [selectedBuilding, setSelectedBuilding] = useState(buildings[0]);
+
   return (
     <>
       <header>
@@ -42,15 +53,17 @@ function App() {
         <h1>Расписание занятий</h1>
         <p>Сегодня: {today()}</p>
         <div>
-          <select>
-            <option value="1">1 корпус</option>
-            <option value="2">2 корпус</option>
-            <option value="3">3 корпус</option>
+          <select
+            value={selectedBuilding}
+            onChange={(e) =>
+              setSelectedBuilding((e.target as HTMLSelectElement).value)}
+          >
+            {buildings.map((b) => <option value={b} key={b}>{b}</option>)}
           </select>
           <select>
-            <option value="231">231</option>
-            <option value="123">123</option>
-            <option value="543">543</option>
+            {audiences[selectedBuilding].map((a) => (
+              <option value={a} key={a}>{a}</option>
+            ))}
           </select>
         </div>
         <div class="action_container">

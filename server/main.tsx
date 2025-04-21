@@ -1,12 +1,20 @@
 import { Hono } from "hono";
 import { serveStatic } from "hono/deno";
+import schedule from "../static/schedule.json" with { type: "json" };
+import { cfg } from "../config.ts";
 
 const app = new Hono();
 
 app.get("*", serveStatic({ root: "./static" }));
 
 app.get("/", (c) => {
-  const schedule = JSON.parse(Deno.readTextFileSync("./static/schedule.json"));
+  const audiences = Object.keys(schedule).reduce((acc, b) => {
+    if (b != cfg.schedule.prioritized_key_name) {
+      acc[b] = Object.keys(schedule[b as keyof typeof schedule]);
+    }
+
+    return acc;
+  }, {} as Record<string, string[]>);
 
   return c.html(
     <html lang="ru">
@@ -22,9 +30,9 @@ app.get("/", (c) => {
       </head>
       <body>
         <script
-          id="__DATA__"
+          id="__AUDIENCES__"
           type="application/json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schedule) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(audiences) }}
         />
         <div id="root"></div>
       </body>

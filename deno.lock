@@ -2,7 +2,9 @@
   "version": "4",
   "specifiers": {
     "jsr:@hono/hono@^4.7.5": "4.7.5",
+    "jsr:@std/collections@^1.0.10": "1.0.10",
     "jsr:@std/path@*": "1.0.8",
+    "jsr:@std/toml@^1.0.4": "1.0.4",
     "npm:@deno/vite-plugin@^1.0.4": "1.0.4_vite@6.2.4",
     "npm:@hono/vite-dev-server@0.19": "0.19.0_hono@4.7.5",
     "npm:@tauri-apps/cli@2.4.1": "2.4.1",
@@ -12,14 +14,24 @@
     "npm:esbuild@~0.25.2": "0.25.2",
     "npm:hono@^4.7.5": "4.7.5",
     "npm:vite@6.2.4": "6.2.4",
-    "npm:vite@^6.2.4": "6.2.4"
+    "npm:vite@^6.2.4": "6.2.4",
+    "npm:zod@^3.24.2": "3.24.2"
   },
   "jsr": {
     "@hono/hono@4.7.5": {
       "integrity": "36a7e1b3db8a58e5dc2bd36a76be53346f0966e04c24c635c4d6f58875575b0a"
     },
+    "@std/collections@1.0.10": {
+      "integrity": "903af106a3d92970d74e20f7ebff77d9658af9bef4403f1dc42a7801c0575899"
+    },
     "@std/path@1.0.8": {
       "integrity": "548fa456bb6a04d3c1a1e7477986b6cffbce95102d0bb447c67c4ee70e0364be"
+    },
+    "@std/toml@1.0.4": {
+      "integrity": "8781e687d04c8fbe246b9c5714be01925792a94d943462c33777675ab557cff1",
+      "dependencies": [
+        "jsr:@std/collections"
+      ]
     }
   },
   "npm": {
@@ -838,16 +850,21 @@
         "buffer-crc32",
         "fd-slicer"
       ]
+    },
+    "zod@3.24.2": {
+      "integrity": "sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ=="
     }
   },
   "workspace": {
     "dependencies": [
       "jsr:@hono/hono@^4.7.5",
+      "jsr:@std/toml@^1.0.4",
       "npm:@deno/vite-plugin@^1.0.4",
       "npm:@tauri-apps/cli@^2.4.1",
       "npm:cheerio@1",
       "npm:esbuild@~0.25.2",
-      "npm:vite@^6.2.4"
+      "npm:vite@^6.2.4",
+      "npm:zod@^3.24.2"
     ]
   }
 }

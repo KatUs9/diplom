@@ -1,11 +1,13 @@
 {
   "imports": {
     "@deno/vite-plugin": "npm:@deno/vite-plugin@^1.0.4",
+    "@std/toml": "jsr:@std/toml@^1.0.4",
     "@tauri-apps/cli": "npm:@tauri-apps/cli@^2.4.1",
     "cheerio": "npm:cheerio@^1.0.0",
     "esbuild": "npm:esbuild@^0.25.2",
     "hono": "jsr:@hono/hono@^4.7.5",
-    "vite": "npm:vite@^6.2.4"
+    "vite": "npm:vite@^6.2.4",
+    "zod": "npm:zod@^3.24.2"
   },
   "tasks": {
     "dev:server": "deno run -A --watch server/main.tsx & deno task build:ui --watch",
