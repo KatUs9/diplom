@@ -30,6 +30,21 @@ function today() {
   return `${formatted} ${week} неделя`;
 }
 
+const days = [
+  "Понедельник",
+  "Вторник",
+  "Среда",
+  "Четверг",
+  "Пятница",
+  "Суббота",
+];
+
+const week = {
+  up: "Верхняя",
+  down: "Нижняя",
+  both: "Обе",
+};
+
 function App() {
   const audiences = readAudiences();
   const buildings = Object.keys(audiences);
@@ -48,11 +63,15 @@ function App() {
     setSchedule(await res.json());
   };
 
+  const handleSave = () => {
+    console.log("jopa");
+  };
+
   return (
     <>
-      <header>
+      <header class="positioner">
         <a
-          href={__ENV__ == "web" ? "https://www.smtu.ru/" : undefined}
+          href="/"
           class="header_logo"
         >
           <img
@@ -67,13 +86,13 @@ function App() {
         </a>
       </header>
 
-      <main>
+      <main data-view={schedule == null ? "select" : "schedule"}>
         {schedule == null
           ? (
             <>
               <h1>Расписание занятий</h1>
               <p>Сегодня: {today()}</p>
-              <div>
+              <div class="select_container">
                 <select
                   value={building}
                   onChange={(e) =>
@@ -101,34 +120,62 @@ function App() {
           )
           : (
             <>
-              <h1>Расписание занятий аудитории {building}{audience}</h1>
-              <p>Сегодня: {today()}</p>
+              <div class="positioner">
+                <h1>
+                  Расписание занятий аудитории {building}
+                  {audience}{" "}
+                  <button type="button" onClick={handleSave} data-print="hide">
+                    <img
+                      src="/assets/download.svg"
+                      alt="Скачать"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </button>
+                </h1>
+                <p data-print="hide">Сегодня: {today()}</p>
+              </div>
 
-              <div>
-                {schedule.map((day) => (
-                  <table>
-                    <thead>
-                      <tr>
-                        <td>Время</td>
-                        <td>Неделя</td>
-                        <td>Группа</td>
-                        <td>Предмет</td>
-                        <td>Преподаватель</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {day.map((l, i) => (
-                        <tr key={i}>
-                          <td>{l.time}</td>
-                          <td>{l.week}</td>
-                          <td>{l.group}</td>
-                          <td>{l.subject}</td>
-                          <td>{l.teacher}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                ))}
+              <div id="schedule">
+                <div class="positioner">
+                  {schedule.map((day, i) =>
+                    day
+                      ? (
+                        <table>
+                          <caption>{days[i]}</caption>
+                          <thead>
+                            <tr>
+                              <td>Время</td>
+                              <td>Неделя</td>
+                              <td>Группы</td>
+                              <td>Предмет</td>
+                              <td>Преподаватель</td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {day.map((l, i) => (
+                              <tr key={i}>
+                                <td>{l.time}</td>
+                                <td>
+                                  <img
+                                    alt={week[l.week]}
+                                    src={`/assets/${l.week}.svg`}
+                                    loading="lazy"
+                                    decoding="async"
+                                    title={week[l.week]}
+                                  />
+                                </td>
+                                <td>{l.group}</td>
+                                <td>{l.subject}</td>
+                                <td>{l.teacher}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      )
+                      : null
+                  )}
+                </div>
               </div>
             </>
           )}

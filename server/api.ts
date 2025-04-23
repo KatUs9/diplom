@@ -27,9 +27,11 @@ export const api = new Hono().get(
       throw new HTTPException(404);
     }
 
+    // @ts-ignore easier to ignore the error than to bother with types
+    const lessons = schedule[building][audience] as Lesson[][];
+
     return c.json(
-      // @ts-ignore easier to ignore the error than to bother with types
-      schedule[building][audience] as Lesson[][],
+      lessons,
       200,
     );
   },

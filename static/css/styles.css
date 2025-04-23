@@ -29,9 +29,37 @@ body {
     "Noto Color Emoji";
 }
 
+select {
+  appearance: none;
+  position: relative;
+  width: 100%;
+  border: 1px solid #000000;
+  border-radius: 0.75em;
+  padding: 0.125em 0.5em;
+  font-size: 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+
+  background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 0.125em center;
+  background-size: 1.25em;
+}
+
+select:first-child {
+  max-width: 15rem;
+}
+
+select:last-child {
+  max-width: 8rem;
+}
+
 #root {
   background-color: var(--color-white);
   color: var(--color-black);
+}
+
+.positioner {
   width: 100%;
   max-width: 82.5rem;
   margin: 0 auto;
@@ -45,7 +73,16 @@ header {
 main {
   display: flex;
   flex-direction: column;
+}
+
+main[data-view="select"] {
   align-items: center;
+}
+
+@media print {
+  main[data-view="schedule"] [data-print="hide"] {
+    display: none;
+  }
 }
 
 .header_logo {
@@ -65,6 +102,14 @@ h1 {
 h1 ~ p {
   font-size: 1.5rem;
   font-weight: 500;
+}
+
+.select_container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
 
 .action_container {
@@ -89,4 +134,50 @@ h1 ~ p {
 
   font-size: 1.5rem;
   font-weight: 500;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+caption {
+  background: #f8f8f8;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: left;
+}
+
+thead tr td {
+  font-weight: bold;
+  padding: 12px 16px;
+  font-size: 14px;
+}
+
+tbody tr td {
+  padding: 12px 16px;
+  border-top: 1px solid #e0e0e0;
+  font-size: 14px;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9fbfd;
+}
+
+tbody tr:hover {
+  background-color: #f0f4f8;
+}
+
+#schedule {
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+  width: 100%;
+  background: #e9ecef;
 }
