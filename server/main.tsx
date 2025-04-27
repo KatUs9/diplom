@@ -1,8 +1,8 @@
 import { Hono } from "hono";
 import { serveStatic } from "hono/deno";
 import schedule from "../static/schedule.json" with { type: "json" };
-import { cfg } from "../config.ts";
 import { api } from "./api.ts";
+import { getAudiences } from "../audiences.ts";
 
 const app = new Hono();
 
@@ -11,13 +11,7 @@ app.route("/api", api);
 app.get("*", serveStatic({ root: "./static" }));
 
 app.get("/", (c) => {
-  const audiences = Object.keys(schedule).reduce((acc, b) => {
-    if (b != cfg.schedule.prioritized_key_name) {
-      acc[b] = Object.keys(schedule[b as keyof typeof schedule]);
-    }
-
-    return acc;
-  }, {} as Record<string, string[]>);
+  const audiences = getAudiences(schedule);
 
   return c.html(
     <html lang="ru">

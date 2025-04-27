@@ -1,7 +1,10 @@
-import { render, useState } from "hono/jsx/dom";
+import { render, Suspense, use, useState } from "hono/jsx/dom";
 import { z } from "zod";
-import { hc, InferResponseType } from "hono/client";
+import { hc } from "hono/client";
 import { type Api } from "../server/api.ts";
+import { getAudiences } from "../audiences.ts";
+import { Lesson } from "../scripts/build-schedule.ts";
+import { useHistoryState } from "./reactive-history.ts";
 
 addEventListener("load", async () => {
   if ("serviceWorker" in navigator) {
@@ -11,10 +14,39 @@ addEventListener("load", async () => {
 
 const api = hc<Api>("/api");
 
-function readAudiences() {
-  return z.record(z.array(z.string())).parse(
-    JSON.parse(document.getElementById("__AUDIENCES__")!.textContent!),
-  );
+type Schedule = {
+  audiences: Record<string, string[]>;
+  lessons: Record<string, Record<string, Lesson[][]>> | null;
+};
+
+function readSchedule() {
+  if (__ENV__ == "desktop") {
+    let submit: null | ((data: Schedule) => void) = null;
+    const input = document.getElementById("upload_schedule")!;
+
+    input.addEventListener("change", async (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      const text = await file!.text();
+      const schedule = JSON.parse(text);
+
+      submit!({ audiences: getAudiences(schedule), lessons: schedule });
+    });
+
+    input.click();
+
+    return new Promise<Schedule>((resolve) => {
+      submit = resolve;
+    });
+  } else {
+    return Promise.resolve(
+      {
+        audiences: z.record(z.array(z.string())).parse(
+          JSON.parse(document.getElementById("__AUDIENCES__")!.textContent!),
+        ),
+        lessons: null,
+      },
+    );
+  }
 }
 
 function today() {
@@ -39,32 +71,47 @@ const days = [
   "Суббота",
 ];
 
-const week = {
+const week: Record<string, string> = {
   up: "Верхняя",
   down: "Нижняя",
   both: "Обе",
 };
 
+const schedule = readSchedule();
+
 function App() {
-  const audiences = readAudiences();
+  return (
+    <Suspense fallback={<p>Ожидаем выбор файла</p>}>
+      <View />
+    </Suspense>
+  );
+}
+
+function View() {
+  const { audiences, lessons } = use(schedule);
   const buildings = Object.keys(audiences);
   const [building, setBuilding] = useState(buildings[0]);
   const [audience, setAudience] = useState(
     audiences[building][0],
   );
 
-  const [schedule, setSchedule] = useState<
-    | null
-    | InferResponseType<typeof api.schedule.$get>
-  >(null);
+  const audienceLessons = useHistoryState<Lesson[][] | null>();
 
   const handleShow = async () => {
-    const res = await api.schedule.$get({ query: { audience, building } });
-    setSchedule(await res.json());
+    let l;
+
+    if (lessons != null) {
+      l = lessons[building][audience];
+    } else {
+      const res = await api.schedule.$get({ query: { audience, building } });
+      l = await res.json();
+    }
+
+    history.pushState(l, "", null);
   };
 
   const handleSave = () => {
-    console.log("jopa");
+    print();
   };
 
   return (
@@ -87,9 +134,9 @@ function App() {
       </header>
 
       <main data-view={schedule == null ? "select" : "schedule"}>
-        {schedule == null
+        {audienceLessons == null
           ? (
-            <>
+            <div class="positioner text-center">
               <h1>Расписание занятий</h1>
               <p>Сегодня: {today()}</p>
               <div class="select_container">
@@ -116,7 +163,7 @@ function App() {
                   Показать
                 </button>
               </div>
-            </>
+            </div>
           )
           : (
             <>
@@ -124,7 +171,11 @@ function App() {
                 <h1>
                   Расписание занятий аудитории {building}
                   {audience}{" "}
-                  <button type="button" onClick={handleSave} data-print="hide">
+                  <button
+                    type="button"
+                    onClick={handleSave}
+                    data-print="hide"
+                  >
                     <img
                       src="/assets/download.svg"
                       alt="Скачать"
@@ -138,7 +189,7 @@ function App() {
 
               <div id="schedule">
                 <div class="positioner">
-                  {schedule.map((day, i) =>
+                  {audienceLessons.map((day, i) =>
                     day
                       ? (
                         <table>

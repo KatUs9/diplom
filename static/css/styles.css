@@ -46,6 +46,10 @@ select {
   background-size: 1.25em;
 }
 
+select:disabled {
+  cursor: not-allowed;
+}
+
 select:first-child {
   max-width: 15rem;
 }
@@ -64,6 +68,10 @@ select:last-child {
   max-width: 82.5rem;
   margin: 0 auto;
   padding: 0 0.75rem;
+}
+
+.text-center {
+  text-align: center;
 }
 
 header {

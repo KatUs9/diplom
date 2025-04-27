@@ -1,12 +1,13 @@
 import * as cheerio from "cheerio";
 import { cfg } from "../config.ts";
+import { PRIORITIZED_KEY_NAME } from "../constants.ts";
 
 export type Lesson = {
-  time: `${string}-${string}`;
-  week: "both" | "up" | "down";
+  time: string;
+  week: string;
   group: string;
   subject: string;
-  kind: "practice" | "lecture" | "lab";
+  kind: string;
   teacher: string;
 };
 
@@ -135,7 +136,7 @@ function transform(
 
   return {
     ...schedule,
-    [cfg.schedule.prioritized_key_name]: cfg.schedule.computer_audiences,
+    [PRIORITIZED_KEY_NAME]: cfg.schedule.computer_audiences,
   };
 }
 

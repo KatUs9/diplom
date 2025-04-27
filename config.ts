@@ -17,7 +17,6 @@ const schema = z.object({
       "У 435",
       "У 439",
     ]),
-    prioritized_key_name: z.string().default("__prioritized"),
   }),
 });
 

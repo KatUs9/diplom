@@ -11,6 +11,7 @@
     "npm:@hono/zod-validator@~0.4.3": "0.4.3_hono@4.7.5_zod@3.24.3",
     "npm:@tauri-apps/cli@*": "2.5.0",
     "npm:@tauri-apps/cli@2.4.1": "2.4.1",
+    "npm:@tauri-apps/cli@2.5.0": "2.5.0",
     "npm:@tauri-apps/cli@^2.4.1": "2.4.1",
     "npm:@types/node@*": "22.12.0",
     "npm:cheerio@*": "1.0.0",
