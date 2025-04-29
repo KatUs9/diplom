@@ -81,7 +81,7 @@ const schedule = readSchedule();
 
 function App() {
   return (
-    <Suspense fallback={<p>Ожидаем выбор файла</p>}>
+    <Suspense fallback={<h1>Ожидаем выбор файла</h1>}>
       <View />
     </Suspense>
   );
