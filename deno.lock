@@ -9,6 +9,8 @@
     "npm:@hono/vite-dev-server@0.19": "0.19.0_hono@4.7.5",
     "npm:@hono/zod-validator@*": "0.4.3_hono@4.7.5_zod@3.24.3",
     "npm:@hono/zod-validator@~0.4.3": "0.4.3_hono@4.7.5_zod@3.24.3",
+    "npm:@tauri-apps/api@*": "2.5.0",
+    "npm:@tauri-apps/api@^2.5.0": "2.5.0",
     "npm:@tauri-apps/cli@*": "2.5.0",
     "npm:@tauri-apps/cli@2.4.1": "2.4.1",
     "npm:@tauri-apps/cli@2.5.0": "2.5.0",
@@ -226,6 +228,9 @@
       "dependencies": [
         "defer-to-connect"
       ]
+    },
+    "@tauri-apps/api@2.5.0": {
+      "integrity": "sha512-Ldux4ip+HGAcPUmuLT8EIkk6yafl5vK0P0c0byzAKzxJh7vxelVtdPONjfgTm96PbN24yjZNESY8CKo8qniluA=="
     },
     "@tauri-apps/cli-darwin-arm64@2.4.1": {
       "integrity": "sha512-QME7s8XQwy3LWClTVlIlwXVSLKkeJ/z88pr917Mtn9spYOjnBfsgHAgGdmpWD3NfJxjg7CtLbhH49DxoFL+hLg=="

@@ -1,10 +1,11 @@
 import { render, Suspense, use, useState } from "hono/jsx/dom";
 import { z } from "zod";
 import { hc } from "hono/client";
-import { type Api } from "../server/api.ts";
+import type { Api } from "../server/api.ts";
 import { getAudiences } from "../audiences.ts";
-import { Lesson } from "../scripts/build-schedule.ts";
+import { type Lesson } from "../schedule.ts";
 import { useHistoryState } from "./reactive-history.ts";
+import { COMPUTER_ICON } from "../constants.ts";
 
 addEventListener("load", async () => {
   if ("serviceWorker" in navigator) {
@@ -92,7 +93,10 @@ function View() {
   const buildings = Object.keys(audiences);
   const [building, setBuilding] = useState(buildings[0]);
   const [audience, setAudience] = useState(
-    audiences[building][0],
+    audiences[building][0].replace(
+      COMPUTER_ICON,
+      "",
+    ),
   );
 
   const audienceLessons = useHistoryState<Lesson[][] | null>();
@@ -114,13 +118,14 @@ function View() {
     print();
   };
 
+  const handleBack = () => {
+    history.replaceState(null, "", null);
+  };
+
   return (
     <>
       <header class="positioner">
-        <a
-          href="/"
-          class="header_logo"
-        >
+        <button type="button" onClick={handleBack} class="header_logo">
           <img
             src="/favicon.svg"
             width="42"
@@ -130,7 +135,7 @@ function View() {
             alt=""
           />
           <span>СПбГМТУ</span>
-        </a>
+        </button>
       </header>
 
       <main data-view={schedule == null ? "select" : "schedule"}>
@@ -142,8 +147,15 @@ function View() {
               <div class="select_container">
                 <select
                   value={building}
-                  onChange={(e) =>
-                    setBuilding((e.target as HTMLSelectElement).value)}
+                  onChange={(e) => {
+                    const building = (e.target as HTMLSelectElement).value;
+
+                    setBuilding(building);
+                    setAudience(audiences[building][0].replace(
+                      COMPUTER_ICON,
+                      "",
+                    ));
+                  }}
                 >
                   {buildings.map((b) => <option value={b} key={b}>{b}</option>)}
                 </select>
@@ -153,12 +165,24 @@ function View() {
                     setAudience((e.target as HTMLSelectElement).value)}
                 >
                   {audiences[building].map((a) => (
-                    <option value={a} key={a}>{a}</option>
+                    <option
+                      value={a.replace(
+                        COMPUTER_ICON,
+                        "",
+                      )}
+                      key={a}
+                    >
+                      {a}
+                    </option>
                   ))}
                 </select>
               </div>
               <div class="action_container">
-                <a href="/schedule.json" download>Сохранить</a>
+                {__ENV__ == "web" && (
+                  <a href="/schedule.json" download>
+                    Сохранить
+                  </a>
+                )}
                 <button type="button" onClick={handleShow}>
                   Показать
                 </button>
