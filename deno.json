@@ -13,7 +13,7 @@
   "tasks": {
     "dev:server": "deno run -A --watch server/main.tsx & deno task build:ui --watch",
     "dev:desktop": "tauri dev",
-    "build:server": "vite build && deno task build:schedule",
+    "build:server": "deno task build:ui && deno task build:schedule",
     "build:schedule": "deno run -A scripts/build-schedule.ts",
     "build:desktop": "deno compile -A desktop/main.ts",
     "build:ui": "vite build --config vite.config.ui.ts",
