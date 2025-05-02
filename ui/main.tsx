@@ -193,8 +193,7 @@ function View() {
             <>
               <div class="positioner">
                 <h1>
-                  Расписание занятий аудитории {building}
-                  {audience}{" "}
+                  Расписание занятий аудитории {building} {audience}{" "}
                   <button
                     type="button"
                     onClick={handleSave}
