@@ -70,6 +70,10 @@ select:last-child {
   padding: 0 0.75rem;
 }
 
+.scrollable {
+  overflow-x: auto;
+}
+
 .text-center {
   text-align: center;
 }
@@ -136,6 +140,13 @@ h1 ~ p {
   margin-top: 1.75rem;
 }
 
+#schedule {
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+  width: 100%;
+  background: #e9ecef;
+}
+
 [data-button] {
   display: flex;
   align-items: center;
@@ -168,55 +179,20 @@ table {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-caption {
-  background: #f8f8f8;
-  width: 100%;
-  padding: 0.5rem 1rem;
-  font-size: 20px;
-  font-weight: 500;
-  text-align: left;
+td, th {
+  padding: 12px 16px;
+  font-size: 14px;
+  text-align: center;
 }
 
-thead tr td {
+th {
   font-weight: bold;
-  padding: 12px 16px;
-  font-size: 14px;
 }
 
-tbody tr td {
-  padding: 12px 16px;
+tbody td, tbody th {
   border-top: 1px solid #e0e0e0;
-  font-size: 14px;
-  width: 100%;
 }
 
-tbody tr td:nth-child(1) {
-  width: 100px;
-}
-
-tbody tr td:nth-child(2), tbody tr td:nth-child(3) {
-  width: 50px;
-}
-
-tbody tr td:nth-child(4) {
-  width: 30%;
-}
-
-tbody tr td:nth-child(5) {
-  width: 35%;
-}
-
-tbody tr:nth-child(even) {
-  background-color: #f9fbfd;
-}
-
-tbody tr:hover {
-  background-color: #f0f4f8;
-}
-
-#schedule {
-  margin-top: 0.5rem;
-  padding-top: 1rem;
-  width: 100%;
-  background: #e9ecef;
+td:not(:first-child) {
+  width: 16.5%;
 }

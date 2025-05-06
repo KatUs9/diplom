@@ -3,8 +3,10 @@ import { serveStatic } from "hono/deno";
 import schedule from "../static/schedule.json" with { type: "json" };
 import { api } from "./api.ts";
 import { getAudiences } from "../audiences.ts";
+import { config } from "../config/deno.ts";
 
 const app = new Hono();
+const cfg = config();
 
 app.route("/api", api);
 
@@ -37,4 +39,6 @@ app.get("/", (c) => {
   );
 });
 
-Deno.serve(app.fetch);
+Deno.serve({
+  port: cfg.server.port,
+}, app.fetch);

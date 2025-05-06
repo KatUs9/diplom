@@ -5,9 +5,10 @@ import type { Api } from "../server/api.ts";
 import { getAudiences } from "../audiences.ts";
 import { buildSchedule, type Lesson } from "../schedule.ts";
 import { useHistoryState } from "./reactive-history.ts";
-import { COMPUTER_ICON } from "../constants.ts";
+import { COMPUTER_ICON, PRIORITIZED_KEY_NAME } from "../constants.ts";
 import { fetch as tauriFetch } from "@tauri-apps/plugin-http";
 import { useLoadingDots } from "./use-loading-dots.ts";
+import { config } from "../config/tauri.ts";
 
 if (__ENV__ == "web") {
   addEventListener("load", async () => {
@@ -23,6 +24,26 @@ type Schedule = {
   audiences: Record<string, string[]>;
   lessons: Record<string, Record<string, Lesson[][]>> | null;
 };
+
+const days = [
+  "Понедельник",
+  "Вторник",
+  "Среда",
+  "Четверг",
+  "Пятница",
+  "Суббота",
+];
+
+const timeSlots = [
+  "08:30-10:00",
+  "10:10-11:40",
+  "11:50-13:20",
+  "14:00-15:30",
+  "15:40-17:10",
+  "17:20-18:50",
+  "19:00-20:30",
+  "20:40-22:10",
+];
 
 function parseAudiencesScriptTag() {
   return {
@@ -46,31 +67,11 @@ function today() {
   return `${formatted} ${week} неделя`;
 }
 
-const days = [
-  "Понедельник",
-  "Вторник",
-  "Среда",
-  "Четверг",
-  "Пятница",
-  "Суббота",
-];
+function teacher(name: string) {
+  const [second, first, middle] = name.split(" ");
 
-const week: Record<string, string> = {
-  up: "Верхняя",
-  down: "Нижняя",
-  both: "Обе",
-};
-
-const timeSlots = [
-  "08:30-10:00",
-  "10:10-11:40",
-  "11:50-13:20",
-  "14:00-15:30",
-  "15:40-17:10",
-  "17:20-18:50",
-  "19:00-20:30",
-  "20:40-22:10",
-];
+  return `${second} ${first[0]}.${middle[0]}.`;
+}
 
 function App() {
   const [schedule, setSchedule] = useState<Schedule | null>(
@@ -90,12 +91,24 @@ function UploadView({ onChange }: { onChange?: (schedule: Schedule) => void }) {
     try {
       setIsLoading(true);
 
-      const schedule = await buildSchedule(tauriFetch);
-      onChange?.({ audiences: getAudiences(schedule), lessons: schedule });
+      const [schedule, cfg] = await Promise.all([
+        buildSchedule(tauriFetch),
+        config(),
+      ]);
+      const prioritizedSchedule = {
+        ...schedule,
+        [PRIORITIZED_KEY_NAME]: cfg.schedule.computer_audiences,
+      };
+      onChange?.({
+        audiences: getAudiences(prioritizedSchedule),
+        lessons: schedule,
+      });
 
       const a = document.createElement("a");
       a.href = URL.createObjectURL(
-        new Blob([JSON.stringify(schedule)], { type: "application/json" }),
+        new Blob([JSON.stringify(prioritizedSchedule)], {
+          type: "application/json",
+        }),
       );
       a.download = "schedule.json";
       a.click();
@@ -259,61 +272,59 @@ function ScheduleView(
               </div>
 
               <div id="schedule">
-                <div class="positioner">
-                  {audienceLessons.map((day, i) =>
-                    day
-                      ? (
-                        <table>
-                          <caption>{days[i]}</caption>
-                          <thead>
-                            <tr>
-                              <td>Время</td>
-                              <td>Неделя</td>
-                              <td>Группы</td>
-                              <td>Предмет</td>
-                              <td>Преподаватель</td>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {timeSlots.map((slot) => {
-                              const l = day.find(({ time }) => time == slot);
+                <div class="positioner scrollable">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th scope="col">{building} {audience}</th>
+                        {days.map((day) => (
+                          <th key={day} scope="col">
+                            {day}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {timeSlots.map((slot) => (
+                        <tr key={slot}>
+                          <th scope="row">{slot.split("-")[0]}</th>
+                          {audienceLessons.map((day, i) => {
+                            const l = day.find(({ time }) => time == slot);
 
-                              return (
-                                <tr key={slot}>
-                                  <td>{slot}</td>
-                                  {l
-                                    ? (
-                                      <>
-                                        <td>
-                                          <img
-                                            alt={week[l.week]}
-                                            src={`/assets/${l.week}.svg`}
-                                            loading="lazy"
-                                            decoding="async"
-                                            title={week[l.week]}
-                                          />
-                                        </td>
-                                        <td>{l.group}</td>
-                                        <td>{l.subject}</td>
-                                        <td>{l.teacher}</td>
-                                      </>
-                                    )
-                                    : (
-                                      <td
-                                        colspan={4}
-                                        style={{ textAlign: "center" }}
-                                      >
-                                        Свободно
-                                      </td>
-                                    )}
-                                </tr>
-                              );
-                            })}
-                          </tbody>
-                        </table>
-                      )
-                      : null
-                  )}
+                            return (
+                              <td key={i}>
+                                {l?.week == "down"
+                                  ? (
+                                    <>
+                                      ————————
+                                      <br />
+                                    </>
+                                  )
+                                  : null}
+                                {l
+                                  ? (
+                                    <>
+                                      {l.group}
+                                      <br />
+                                      {teacher(l.teacher)}
+                                    </>
+                                  )
+                                  : null}
+                                {l?.week == "up"
+                                  ? (
+                                    <>
+                                      <br />
+                                      ————————
+                                    </>
+                                  )
+                                  : null}
+                              </td>
+                            );
+                          })}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </>
