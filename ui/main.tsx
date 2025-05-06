@@ -61,6 +61,17 @@ const week: Record<string, string> = {
   both: "Обе",
 };
 
+const timeSlots = [
+  "08:30-10:00",
+  "10:10-11:40",
+  "11:50-13:20",
+  "14:00-15:30",
+  "15:40-17:10",
+  "17:20-18:50",
+  "19:00-20:30",
+  "20:40-22:10",
+];
+
 function App() {
   const [schedule, setSchedule] = useState<Schedule | null>(
     __ENV__ == "web" ? parseAudiencesScriptTag() : null,
@@ -264,23 +275,40 @@ function ScheduleView(
                             </tr>
                           </thead>
                           <tbody>
-                            {day.map((l, i) => (
-                              <tr key={i}>
-                                <td>{l.time}</td>
-                                <td>
-                                  <img
-                                    alt={week[l.week]}
-                                    src={`/assets/${l.week}.svg`}
-                                    loading="lazy"
-                                    decoding="async"
-                                    title={week[l.week]}
-                                  />
-                                </td>
-                                <td>{l.group}</td>
-                                <td>{l.subject}</td>
-                                <td>{l.teacher}</td>
-                              </tr>
-                            ))}
+                            {timeSlots.map((slot) => {
+                              const l = day.find(({ time }) => time == slot);
+
+                              return (
+                                <tr key={slot}>
+                                  <td>{slot}</td>
+                                  {l
+                                    ? (
+                                      <>
+                                        <td>
+                                          <img
+                                            alt={week[l.week]}
+                                            src={`/assets/${l.week}.svg`}
+                                            loading="lazy"
+                                            decoding="async"
+                                            title={week[l.week]}
+                                          />
+                                        </td>
+                                        <td>{l.group}</td>
+                                        <td>{l.subject}</td>
+                                        <td>{l.teacher}</td>
+                                      </>
+                                    )
+                                    : (
+                                      <td
+                                        colspan={4}
+                                        style={{ textAlign: "center" }}
+                                      >
+                                        Свободно
+                                      </td>
+                                    )}
+                                </tr>
+                              );
+                            })}
                           </tbody>
                         </table>
                       )
