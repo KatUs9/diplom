@@ -3,7 +3,7 @@ import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
 import schedule from "../static/schedule.json" with { type: "json" };
 import { HTTPException } from "hono/http-exception";
-import { Lesson } from "../scripts/build-schedule.ts";
+import type { Lesson } from "../schedule.ts";
 
 type Schedule = typeof schedule;
 type Building = keyof Schedule;

@@ -1,17 +1,21 @@
-import { render, Suspense, use, useState } from "hono/jsx/dom";
+import { render, useState } from "hono/jsx/dom";
 import { z } from "zod";
 import { hc } from "hono/client";
 import type { Api } from "../server/api.ts";
 import { getAudiences } from "../audiences.ts";
-import { type Lesson } from "../schedule.ts";
+import { buildSchedule, type Lesson } from "../schedule.ts";
 import { useHistoryState } from "./reactive-history.ts";
 import { COMPUTER_ICON } from "../constants.ts";
+import { fetch as tauriFetch } from "@tauri-apps/plugin-http";
+import { useLoadingDots } from "./use-loading-dots.ts";
 
-addEventListener("load", async () => {
-  if ("serviceWorker" in navigator) {
-    await navigator.serviceWorker.register("/sw.js");
-  }
-});
+if (__ENV__ == "web") {
+  addEventListener("load", async () => {
+    if ("serviceWorker" in navigator) {
+      await navigator.serviceWorker.register("/sw.js");
+    }
+  });
+}
 
 const api = hc<Api>("/api");
 
@@ -20,34 +24,13 @@ type Schedule = {
   lessons: Record<string, Record<string, Lesson[][]>> | null;
 };
 
-function readSchedule() {
-  if (__ENV__ == "desktop") {
-    let submit: null | ((data: Schedule) => void) = null;
-    const input = document.getElementById("upload_schedule")!;
-
-    input.addEventListener("change", async (e) => {
-      const file = (e.target as HTMLInputElement).files?.[0];
-      const text = await file!.text();
-      const schedule = JSON.parse(text);
-
-      submit!({ audiences: getAudiences(schedule), lessons: schedule });
-    });
-
-    input.click();
-
-    return new Promise<Schedule>((resolve) => {
-      submit = resolve;
-    });
-  } else {
-    return Promise.resolve(
-      {
-        audiences: z.record(z.array(z.string())).parse(
-          JSON.parse(document.getElementById("__AUDIENCES__")!.textContent!),
-        ),
-        lessons: null,
-      },
-    );
-  }
+function parseAudiencesScriptTag() {
+  return {
+    audiences: z.record(z.array(z.string())).parse(
+      JSON.parse(document.getElementById("__AUDIENCES__")!.textContent!),
+    ),
+    lessons: null,
+  };
 }
 
 function today() {
@@ -78,18 +61,70 @@ const week: Record<string, string> = {
   both: "Обе",
 };
 
-const schedule = readSchedule();
-
 function App() {
+  const [schedule, setSchedule] = useState<Schedule | null>(
+    __ENV__ == "web" ? parseAudiencesScriptTag() : null,
+  );
+
+  return schedule
+    ? <ScheduleView schedule={schedule} />
+    : <UploadView onChange={(s) => setSchedule(s)} />;
+}
+
+function UploadView({ onChange }: { onChange?: (schedule: Schedule) => void }) {
+  const [isLoading, setIsLoading] = useState(false);
+  const dots = useLoadingDots(isLoading);
+
+  const handleDownload = async () => {
+    try {
+      setIsLoading(true);
+
+      const schedule = await buildSchedule(tauriFetch);
+      onChange?.({ audiences: getAudiences(schedule), lessons: schedule });
+
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(
+        new Blob([JSON.stringify(schedule)], { type: "application/json" }),
+      );
+      a.download = "schedule.json";
+      a.click();
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <Suspense fallback={<h1>Ожидаем выбор файла</h1>}>
-      <View />
-    </Suspense>
+    <div id="upload" class="positioner">
+      <input
+        type="file"
+        accept="application/json"
+        id="upload_schedule"
+        onChange={async (e) => {
+          const file = (e.target as HTMLInputElement).files?.[0];
+          const text = await file!.text();
+          const schedule = JSON.parse(text);
+
+          onChange?.({ audiences: getAudiences(schedule), lessons: schedule });
+        }}
+        hidden
+      />
+      <label for="upload_schedule" data-button>Загрузить расписание</label>
+      <span>или</span>
+      <button
+        type="button"
+        onClick={handleDownload}
+        disabled={isLoading}
+        data-button
+      >
+        {isLoading ? "Формируем" + dots : "Сформировать"}
+      </button>
+    </div>
   );
 }
 
-function View() {
-  const { audiences, lessons } = use(schedule);
+function ScheduleView(
+  { schedule: { audiences, lessons } }: { schedule: Schedule },
+) {
   const buildings = Object.keys(audiences);
   const [building, setBuilding] = useState(buildings[0]);
   const [audience, setAudience] = useState(
@@ -138,7 +173,7 @@ function View() {
         </button>
       </header>
 
-      <main data-view={schedule == null ? "select" : "schedule"}>
+      <main data-view={audienceLessons == null ? "select" : "schedule"}>
         {audienceLessons == null
           ? (
             <div class="positioner text-center">
@@ -178,12 +213,14 @@ function View() {
                 </select>
               </div>
               <div class="action_container">
-                {__ENV__ == "web" && (
-                  <a href="/schedule.json" download>
-                    Сохранить
-                  </a>
-                )}
-                <button type="button" onClick={handleShow}>
+                {__ENV__ == "web"
+                  ? (
+                    <a href="/schedule.json" download data-button>
+                      Сохранить
+                    </a>
+                  )
+                  : null}
+                <button type="button" onClick={handleShow} data-button>
                   Показать
                 </button>
               </div>

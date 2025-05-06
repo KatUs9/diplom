@@ -2,40 +2,25 @@
   "version": "4",
   "specifiers": {
     "jsr:@std/collections@^1.0.10": "1.0.10",
-    "jsr:@std/path@*": "1.0.8",
     "jsr:@std/toml@*": "1.0.4",
-    "npm:@deno/vite-plugin@*": "1.0.4_vite@6.3.2__@types+node@22.12.0__picomatch@4.0.2_@types+node@22.12.0",
-    "npm:@deno/vite-plugin@^1.0.4": "1.0.4_vite@6.3.2__@types+node@22.12.0__picomatch@4.0.2_@types+node@22.12.0",
-    "npm:@hono/vite-dev-server@0.19": "0.19.0_hono@4.7.5",
-    "npm:@hono/zod-validator@*": "0.4.3_hono@4.7.5_zod@3.24.3",
-    "npm:@hono/zod-validator@~0.4.3": "0.4.3_hono@4.7.5_zod@3.24.3",
-    "npm:@tauri-apps/api@*": "2.5.0",
-    "npm:@tauri-apps/api@^2.5.0": "2.5.0",
+    "npm:@deno/vite-plugin@*": "1.0.4_vite@6.3.2__picomatch@4.0.2_@types+node@22.12.0",
+    "npm:@dnd-kit/core@*": "6.3.1_react@19.0.0_react-dom@19.1.0__react@19.0.0",
+    "npm:@dnd-kit/core@^6.3.1": "6.3.1_react@19.0.0_react-dom@19.1.0__react@19.0.0",
+    "npm:@hono/zod-validator@*": "0.4.3_hono@4.7.7_zod@3.24.3",
     "npm:@tauri-apps/cli@*": "2.5.0",
-    "npm:@tauri-apps/cli@2.4.1": "2.4.1",
     "npm:@tauri-apps/cli@2.5.0": "2.5.0",
-    "npm:@tauri-apps/cli@^2.4.1": "2.4.1",
+    "npm:@tauri-apps/plugin-http@*": "2.4.3",
     "npm:@types/node@*": "22.12.0",
     "npm:cheerio@*": "1.0.0",
-    "npm:cheerio@1": "1.0.0",
     "npm:esbuild@*": "0.25.2",
-    "npm:esbuild@~0.25.2": "0.25.2",
-    "npm:hono@*": "4.7.5",
-    "npm:hono@^4.7.5": "4.7.5",
-    "npm:hono@^4.7.7": "4.7.7",
-    "npm:vite@*": "6.3.2_@types+node@22.12.0_picomatch@4.0.2",
-    "npm:vite@6.2.4": "6.2.4_@types+node@22.12.0",
-    "npm:vite@6.3.2": "6.3.2_@types+node@22.12.0_picomatch@4.0.2",
-    "npm:vite@^6.2.4": "6.2.4_@types+node@22.12.0",
-    "npm:zod@*": "3.24.3",
-    "npm:zod@^3.24.2": "3.24.3"
+    "npm:hono@*": "4.7.7",
+    "npm:vite@*": "6.3.2_picomatch@4.0.2_@types+node@22.12.0",
+    "npm:vite@6.3.2": "6.3.2_picomatch@4.0.2_@types+node@22.12.0",
+    "npm:zod@*": "3.24.3"
   },
   "jsr": {
     "@std/collections@1.0.10": {
       "integrity": "903af106a3d92970d74e20f7ebff77d9658af9bef4403f1dc42a7801c0575899"
-    },
-    "@std/path@1.0.8": {
-      "integrity": "548fa456bb6a04d3c1a1e7477986b6cffbce95102d0bb447c67c4ee70e0364be"
     },
     "@std/toml@1.0.4": {
       "integrity": "8781e687d04c8fbe246b9c5714be01925792a94d943462c33777675ab557cff1",
@@ -45,23 +30,40 @@
     }
   },
   "npm": {
-    "@deno/vite-plugin@1.0.4_vite@6.3.2__@types+node@22.12.0__picomatch@4.0.2_@types+node@22.12.0": {
+    "@deno/vite-plugin@1.0.4_vite@6.3.2__picomatch@4.0.2": {
       "integrity": "sha512-xg8YT8Wn2sGXSnJgiGTpBGX1Dov0c6fd1rAp8VsfrCUtyBRRWzwVMAnd3fQ4yq8h7LSVvJUxEFN4U421k/DQLA==",
       "dependencies": [
-        "vite@6.3.2_@types+node@22.12.0_picomatch@4.0.2"
+        "vite@6.3.2_picomatch@4.0.2"
       ]
     },
-    "@electron/get@2.0.3": {
-      "integrity": "sha512-Qkzpg2s9GnVV2I2BjRksUi43U5e6+zaQMcjoJy0C+C5oxaKl+fmckGDQFtRpZpZV0NQekuZZ+tGz7EA9TVnQtQ==",
+    "@deno/vite-plugin@1.0.4_vite@6.3.2__picomatch@4.0.2_@types+node@22.12.0": {
+      "integrity": "sha512-xg8YT8Wn2sGXSnJgiGTpBGX1Dov0c6fd1rAp8VsfrCUtyBRRWzwVMAnd3fQ4yq8h7LSVvJUxEFN4U421k/DQLA==",
       "dependencies": [
-        "debug",
-        "env-paths",
-        "fs-extra",
-        "global-agent",
-        "got",
-        "progress",
-        "semver@6.3.1",
-        "sumchecker"
+        "vite@6.3.2_picomatch@4.0.2_@types+node@22.12.0"
+      ]
+    },
+    "@dnd-kit/accessibility@3.1.1_react@19.0.0": {
+      "integrity": "sha512-2P+YgaXF+gRsIihwwY1gCsQSYnu9Zyj2py8kY5fFvUM1qm2WA2u639R6YNVfU4GWr+ZM5mqEsfHZZLoRONbemw==",
+      "dependencies": [
+        "react",
+        "tslib"
+      ]
+    },
+    "@dnd-kit/core@6.3.1_react@19.0.0_react-dom@19.1.0__react@19.0.0": {
+      "integrity": "sha512-xkGBRQQab4RLwgXxoqETICr6S5JlogafbhNsidmrkVv2YRs5MLwpjoF2qpiGjQt8S9AoxtIV603s0GIUpY5eYQ==",
+      "dependencies": [
+        "@dnd-kit/accessibility",
+        "@dnd-kit/utilities",
+        "react",
+        "react-dom",
+        "tslib"
+      ]
+    },
+    "@dnd-kit/utilities@3.2.2_react@19.0.0": {
+      "integrity": "sha512-+MKAJEOfaBe5SmV6t34p80MMKhjvUz0vRrvVJbPT0WElzaOJ/1xs+D+KDv+tD/NE5ujfrChEcshd4fLn0wpiqg==",
+      "dependencies": [
+        "react",
+        "tslib"
       ]
     },
     "@esbuild/aix-ppc64@0.25.2": {
@@ -139,24 +141,10 @@
     "@esbuild/win32-x64@0.25.2": {
       "integrity": "sha512-kM3HKb16VIXZyIeVrM1ygYmZBKybX8N4p754bw390wGO3Tf2j4L2/WYL+4suWujpgf6GBYs3jv7TyUivdd05JA=="
     },
-    "@hono/node-server@1.14.0_hono@4.7.5": {
-      "integrity": "sha512-YUCxJwgHRKSqjrdTk9e4VMGKN27MK5r4+MGPyZTgKH+IYbK+KtYbHeOcPGJ91KGGD6RIQiz2dAHxvjauNhOS8g==",
-      "dependencies": [
-        "hono@4.7.5"
-      ]
-    },
-    "@hono/vite-dev-server@0.19.0_hono@4.7.5": {
-      "integrity": "sha512-myMc4Nm0nFQSPaeE6I/a1ODyDR5KpQ4EHodX4Tu/7qlB31GfUemhUH/WsO91HJjDEpRRpsT4Zbg+PleMlpTljw==",
-      "dependencies": [
-        "@hono/node-server",
-        "hono@4.7.5",
-        "minimatch"
-      ]
-    },
-    "@hono/zod-validator@0.4.3_hono@4.7.5_zod@3.24.3": {
+    "@hono/zod-validator@0.4.3_hono@4.7.7_zod@3.24.3": {
       "integrity": "sha512-xIgMYXDyJ4Hj6ekm9T9Y27s080Nl9NXHcJkOvkXPhubOLj8hZkOL8pDnnXfvCf5xEE8Q4oMFenQUZZREUY2gqQ==",
       "dependencies": [
-        "hono@4.7.5",
+        "hono",
         "zod"
       ]
     },
@@ -220,193 +208,75 @@
     "@rollup/rollup-win32-x64-msvc@4.40.0": {
       "integrity": "sha512-lpPE1cLfP5oPzVjKMx10pgBmKELQnFJXHgvtHCtuJWOv8MxqdEIMNtgHgBFf7Ea2/7EuVwa9fodWUfXAlXZLZQ=="
     },
-    "@sindresorhus/is@4.6.0": {
-      "integrity": "sha512-t09vSN3MdfsyCHoFcTRCH/iUtG7OJ0CsjzB8cjAmKc/va/kIgeDI/TxsigdncE/4be734m0cvIYwNaV4i2XqAw=="
-    },
-    "@szmarczak/http-timer@4.0.6": {
-      "integrity": "sha512-4BAffykYOgO+5nzBWYwE3W90sBgLJoUPRWWcL8wlyiM8IB8ipJz3UMJ9KXQd1RKQXpKp8Tutn80HZtWsu2u76w==",
-      "dependencies": [
-        "defer-to-connect"
-      ]
-    },
     "@tauri-apps/api@2.5.0": {
       "integrity": "sha512-Ldux4ip+HGAcPUmuLT8EIkk6yafl5vK0P0c0byzAKzxJh7vxelVtdPONjfgTm96PbN24yjZNESY8CKo8qniluA=="
-    },
-    "@tauri-apps/cli-darwin-arm64@2.4.1": {
-      "integrity": "sha512-QME7s8XQwy3LWClTVlIlwXVSLKkeJ/z88pr917Mtn9spYOjnBfsgHAgGdmpWD3NfJxjg7CtLbhH49DxoFL+hLg=="
     },
     "@tauri-apps/cli-darwin-arm64@2.5.0": {
       "integrity": "sha512-VuVAeTFq86dfpoBDNYAdtQVLbP0+2EKCHIIhkaxjeoPARR0sLpFHz2zs0PcFU76e+KAaxtEtAJAXGNUc8E1PzQ=="
     },
-    "@tauri-apps/cli-darwin-x64@2.4.1": {
-      "integrity": "sha512-/r89IcW6Ya1sEsFUEH7wLNruDTj7WmDWKGpPy7gATFtQr5JEY4heernqE82isjTUimnHZD8SCr0jA3NceI4ybw=="
-    },
     "@tauri-apps/cli-darwin-x64@2.5.0": {
       "integrity": "sha512-hUF01sC06cZVa8+I0/VtsHOk9BbO75rd+YdtHJ48xTdcYaQ5QIwL4yZz9OR1AKBTaUYhBam8UX9Pvd5V2/4Dpw=="
-    },
-    "@tauri-apps/cli-linux-arm-gnueabihf@2.4.1": {
-      "integrity": "sha512-9tDijkRB+CchAGjXxYdY9l/XzFpLp1yihUtGXJz9eh+3qIoRI043n3e+6xmU8ZURr7XPnu+R4sCmXs6HD+NCEQ=="
     },
     "@tauri-apps/cli-linux-arm-gnueabihf@2.5.0": {
       "integrity": "sha512-LQKqttsK252LlqYyX8R02MinUsfFcy3+NZiJwHFgi5Y3+ZUIAED9cSxJkyNtuY5KMnR4RlpgWyLv4P6akN1xhg=="
     },
-    "@tauri-apps/cli-linux-arm64-gnu@2.4.1": {
-      "integrity": "sha512-pnFGDEXBAzS4iDYAVxTRhAzNu3K2XPGflYyBc0czfHDBXopqRgMyj5Q9Wj7HAwv6cM8BqzXINxnb2ZJFGmbSgA=="
-    },
     "@tauri-apps/cli-linux-arm64-gnu@2.5.0": {
       "integrity": "sha512-mTQufsPcpdHg5RW0zypazMo4L55EfeE5snTzrPqbLX4yCK2qalN7+rnP8O8GT06xhp6ElSP/Ku1M2MR297SByQ=="
-    },
-    "@tauri-apps/cli-linux-arm64-musl@2.4.1": {
-      "integrity": "sha512-Hp0zXgeZNKmT+eoJSCxSBUm2QndNuRxR55tmIeNm3vbyUMJN/49uW7nurZ5fBPsacN4Pzwlx1dIMK+Gnr9A69w=="
     },
     "@tauri-apps/cli-linux-arm64-musl@2.5.0": {
       "integrity": "sha512-rQO1HhRUQqyEaal5dUVOQruTRda/TD36s9kv1hTxZiFuSq3558lsTjAcUEnMAtBcBkps20sbyTJNMT0AwYIk8Q=="
     },
-    "@tauri-apps/cli-linux-riscv64-gnu@2.4.1": {
-      "integrity": "sha512-3T3bo2E4fdYRvzcXheWUeQOVB+LunEEi92iPRgOyuSVexVE4cmHYl+MPJF+EUV28Et0hIVTsHibmDO0/04lAFg=="
-    },
     "@tauri-apps/cli-linux-riscv64-gnu@2.5.0": {
       "integrity": "sha512-7oS18FN46yDxyw1zX/AxhLAd7T3GrLj3Ai6s8hZKd9qFVzrAn36ESL7d3G05s8wEtsJf26qjXnVF4qleS3dYsA=="
-    },
-    "@tauri-apps/cli-linux-x64-gnu@2.4.1": {
-      "integrity": "sha512-kLN0FdNONO+2i+OpU9+mm6oTGufRC00e197TtwjpC0N6K2K8130w7Q3FeODIM2CMyg0ov3tH+QWqKW7GNhHFzg=="
     },
     "@tauri-apps/cli-linux-x64-gnu@2.5.0": {
       "integrity": "sha512-SG5sFNL7VMmDBdIg3nO3EzNRT306HsiEQ0N90ILe3ZABYAVoPDO/ttpCO37ApLInTzrq/DLN+gOlC/mgZvLw1w=="
     },
-    "@tauri-apps/cli-linux-x64-musl@2.4.1": {
-      "integrity": "sha512-a8exvA5Ub9eg66a6hsMQKJIkf63QAf9OdiuFKOsEnKZkNN2x0NLgfvEcqdw88VY0UMs9dBoZ1AGbWMeYnLrLwQ=="
-    },
     "@tauri-apps/cli-linux-x64-musl@2.5.0": {
       "integrity": "sha512-QXDM8zp/6v05PNWju5ELsVwF0VH1n6b5pk2E6W/jFbbiwz80Vs1lACl9pv5kEHkrxBj+aWU/03JzGuIj2g3SkQ=="
-    },
-    "@tauri-apps/cli-win32-arm64-msvc@2.4.1": {
-      "integrity": "sha512-4JFrslsMCJQG1c573T9uqQSAbF3j/tMKkMWzsIssv8jvPiP++OG61A2/F+y9te9/Q/O95cKhDK63kaiO5xQaeg=="
     },
     "@tauri-apps/cli-win32-arm64-msvc@2.5.0": {
       "integrity": "sha512-pFSHFK6b+o9y4Un8w0gGLwVyFTZaC3P0kQ7umRt/BLDkzD5RnQ4vBM7CF8BCU5nkwmEBUCZd7Wt3TWZxe41o6Q=="
     },
-    "@tauri-apps/cli-win32-ia32-msvc@2.4.1": {
-      "integrity": "sha512-9eXfFORehYSCRwxg2KodfmX/mhr50CI7wyBYGbPLePCjr5z0jK/9IyW6r0tC+ZVjwpX48dkk7hKiUgI25jHjzA=="
-    },
     "@tauri-apps/cli-win32-ia32-msvc@2.5.0": {
       "integrity": "sha512-EArv1IaRlogdLAQyGlKmEqZqm5RfHCUMhJoedWu7GtdbOMUfSAz6FMX2boE1PtEmNO4An+g188flLeVErrxEKg=="
-    },
-    "@tauri-apps/cli-win32-x64-msvc@2.4.1": {
-      "integrity": "sha512-60a4Ov7Jrwqz2hzDltlS7301dhSAmM9dxo+IRBD3xz7yobKrgaHXYpWvnRomYItHcDd51VaKc9292H8/eE/gsw=="
     },
     "@tauri-apps/cli-win32-x64-msvc@2.5.0": {
       "integrity": "sha512-lj43EFYbnAta8pd9JnUq87o+xRUR0odz+4rixBtTUwUgdRdwQ2V9CzFtsMu6FQKpFQ6mujRK6P1IEwhL6ADRsQ=="
     },
-    "@tauri-apps/cli@2.4.1": {
-      "integrity": "sha512-9Ta81jx9+57FhtU/mPIckDcOBtPTUdKM75t4+aA0X84b8Sclb0jy1xA8NplmcRzp2fsfIHNngU2NiRxsW5+yOQ==",
-      "dependencies": [
-        "@tauri-apps/cli-darwin-arm64@2.4.1",
-        "@tauri-apps/cli-darwin-x64@2.4.1",
-        "@tauri-apps/cli-linux-arm-gnueabihf@2.4.1",
-        "@tauri-apps/cli-linux-arm64-gnu@2.4.1",
-        "@tauri-apps/cli-linux-arm64-musl@2.4.1",
-        "@tauri-apps/cli-linux-riscv64-gnu@2.4.1",
-        "@tauri-apps/cli-linux-x64-gnu@2.4.1",
-        "@tauri-apps/cli-linux-x64-musl@2.4.1",
-        "@tauri-apps/cli-win32-arm64-msvc@2.4.1",
-        "@tauri-apps/cli-win32-ia32-msvc@2.4.1",
-        "@tauri-apps/cli-win32-x64-msvc@2.4.1"
-      ]
-    },
     "@tauri-apps/cli@2.5.0": {
       "integrity": "sha512-rAtHqG0Gh/IWLjN2zTf3nZqYqbo81oMbqop56rGTjrlWk9pTTAjkqOjSL9XQLIMZ3RbeVjveCqqCA0s8RnLdMg==",
       "dependencies": [
-        "@tauri-apps/cli-darwin-arm64@2.5.0",
-        "@tauri-apps/cli-darwin-x64@2.5.0",
-        "@tauri-apps/cli-linux-arm-gnueabihf@2.5.0",
-        "@tauri-apps/cli-linux-arm64-gnu@2.5.0",
-        "@tauri-apps/cli-linux-arm64-musl@2.5.0",
-        "@tauri-apps/cli-linux-riscv64-gnu@2.5.0",
-        "@tauri-apps/cli-linux-x64-gnu@2.5.0",
-        "@tauri-apps/cli-linux-x64-musl@2.5.0",
-        "@tauri-apps/cli-win32-arm64-msvc@2.5.0",
-        "@tauri-apps/cli-win32-ia32-msvc@2.5.0",
-        "@tauri-apps/cli-win32-x64-msvc@2.5.0"
+        "@tauri-apps/cli-darwin-arm64",
+        "@tauri-apps/cli-darwin-x64",
+        "@tauri-apps/cli-linux-arm-gnueabihf",
+        "@tauri-apps/cli-linux-arm64-gnu",
+        "@tauri-apps/cli-linux-arm64-musl",
+        "@tauri-apps/cli-linux-riscv64-gnu",
+        "@tauri-apps/cli-linux-x64-gnu",
+        "@tauri-apps/cli-linux-x64-musl",
+        "@tauri-apps/cli-win32-arm64-msvc",
+        "@tauri-apps/cli-win32-ia32-msvc",
+        "@tauri-apps/cli-win32-x64-msvc"
       ]
     },
-    "@types/cacheable-request@6.0.3": {
-      "integrity": "sha512-IQ3EbTzGxIigb1I3qPZc1rWJnH0BmSKv5QYTalEwweFvyBDLSAe24zP0le/hyi7ecGfZVlIVAg4BZqb8WBwKqw==",
+    "@tauri-apps/plugin-http@2.4.3": {
+      "integrity": "sha512-Us8X+FikzpaZRNr4kH4HLwyXascHbM42p6LxAqRTQnHPrrqp1usaH4vxWAZalPvTbHJ3gBEMJPHusFJgtjGJjA==",
       "dependencies": [
-        "@types/http-cache-semantics",
-        "@types/keyv",
-        "@types/node@22.12.0",
-        "@types/responselike"
+        "@tauri-apps/api"
       ]
     },
     "@types/estree@1.0.7": {
       "integrity": "sha512-w28IoSUCJpidD/TGviZwwMJckNESJZXFu7NBZ5YJ4mEUnNraUn9Pm8HSZm/jDF1pDWYKspWE7oVphigUPRakIQ=="
     },
-    "@types/http-cache-semantics@4.0.4": {
-      "integrity": "sha512-1m0bIFVc7eJWyve9S0RnuRgcQqF/Xd5QsUZAZeQFr1Q3/p9JWoQQEqmVy+DPTNpGXwhgIetAoYF8JSc33q29QA=="
-    },
-    "@types/keyv@3.1.4": {
-      "integrity": "sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==",
-      "dependencies": [
-        "@types/node@22.12.0"
-      ]
-    },
-    "@types/node@18.19.85": {
-      "integrity": "sha512-61sLB7tXUMpkHJagZQAzPV4xGyqzulLvphe0lquRX80rZG24VupRv9p6Qo06V9VBNeGBM8Sv8rRVVLji6pi7QQ==",
-      "dependencies": [
-        "undici-types@5.26.5"
-      ]
-    },
     "@types/node@22.12.0": {
       "integrity": "sha512-Fll2FZ1riMjNmlmJOdAyY5pUbkftXslB5DgEzlIuNaiWhXd00FhWxVC/r4yV/4wBb9JfImTu+jiSvXTkJ7F/gA==",
       "dependencies": [
-        "undici-types@6.20.0"
+        "undici-types"
       ]
-    },
-    "@types/responselike@1.0.3": {
-      "integrity": "sha512-H/+L+UkTV33uf49PH5pCAUBVPNj2nDBXTN+qS1dOwyyg24l3CcicicCA7ca+HMvJBZcFgl5r8e+RR6elsb4Lyw==",
-      "dependencies": [
-        "@types/node@22.12.0"
-      ]
-    },
-    "@types/yauzl@2.10.3": {
-      "integrity": "sha512-oJoftv0LSuaDZE3Le4DbKX+KS9G36NzOeSap90UIK0yMA/NhKJhqlSGtNDORNRaIbQfzjXDrQa0ytJ6mNRGz/Q==",
-      "dependencies": [
-        "@types/node@22.12.0"
-      ]
-    },
-    "balanced-match@1.0.2": {
-      "integrity": "sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw=="
     },
     "boolbase@1.0.0": {
       "integrity": "sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww=="
-    },
-    "boolean@3.2.0": {
-      "integrity": "sha512-d0II/GO9uf9lfUHH2BQsjxzRJZBdsjgsBiW4BvhWk/3qoKwQFjIDVN19PfX8F2D/r9PCMTtLWjYVCFrpeYUzsw=="
-    },
-    "brace-expansion@2.0.1": {
-      "integrity": "sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==",
-      "dependencies": [
-        "balanced-match"
-      ]
-    },
-    "buffer-crc32@0.2.13": {
-      "integrity": "sha512-VO9Ht/+p3SN7SKWqcrgEzjGbRSJYTx+Q1pTQC0wrWqHx0vpJraQ6GtHx8tvcg1rlK1byhU5gccxgOgj7B0TDkQ=="
-    },
-    "cacheable-lookup@5.0.4": {
-      "integrity": "sha512-2/kNscPhpcxrOigMZzbiWF7dz8ilhb/nIHU3EyZiXWXpeq/au8qJ8VhdftMkty3n7Gj6HIGalQG8oiBNB3AJgA=="
-    },
-    "cacheable-request@7.0.4": {
-      "integrity": "sha512-v+p6ongsrp0yTGbJXjgxPow2+DL93DASP4kXCDKb8/bwRtt9OEF3whggkkDkGNzgcWy2XaF4a8nZglC7uElscg==",
-      "dependencies": [
-        "clone-response",
-        "get-stream",
-        "http-cache-semantics",
-        "keyv",
-        "lowercase-keys",
-        "normalize-url",
-        "responselike"
-      ]
     },
     "cheerio-select@2.1.0": {
       "integrity": "sha512-9v9kG0LvzrlcungtnJtpGNxY+fzECQKhK4EGJX2vByejiMX84MFNQw4UxPJl3bFbTMw+Dfs37XaIkCwTZfLh4g==",
@@ -435,12 +305,6 @@
         "whatwg-mimetype"
       ]
     },
-    "clone-response@1.0.3": {
-      "integrity": "sha512-ROoL94jJH2dUVML2Y/5PEDNaSHgeOdSDicUyS7izcF63G6sTc/FTjLub4b8Il9S8S0beOfYt0TaA5qvFK+w0wA==",
-      "dependencies": [
-        "mimic-response@1.0.1"
-      ]
-    },
     "css-select@5.1.0": {
       "integrity": "sha512-nwoRF1rvRRnnCqqY7updORDsuqKzqYJ28+oSMaJMMgOauh3fvwHqMS7EZpIPqK8GL+g9mKxF1vP/ZjSeNjEVHg==",
       "dependencies": [
@@ -453,40 +317,6 @@
     },
     "css-what@6.1.0": {
       "integrity": "sha512-HTUrgRJ7r4dsZKU6GjmpfRK1O76h97Z8MfS1G0FozR+oF2kG6Vfe8JE6zwrkbxigziPHinCJ+gCPjA9EaBDtRw=="
-    },
-    "debug@4.4.0": {
-      "integrity": "sha512-6WTZ/IxCY/T6BALoZHaE4ctp9xm+Z5kY/pzYaCHRFeyVhojxlrm+46y68HA6hr0TcwEssoxNiDEUJQjfPZ/RYA==",
-      "dependencies": [
-        "ms"
-      ]
-    },
-    "decompress-response@6.0.0": {
-      "integrity": "sha512-aW35yZM6Bb/4oJlZncMH2LCoZtJXTRxES17vE3hoRiowU2kWHaJKFkSBDnDR+cm9J+9QhXmREyIfv0pji9ejCQ==",
-      "dependencies": [
-        "mimic-response@3.1.0"
-      ]
-    },
-    "defer-to-connect@2.0.1": {
-      "integrity": "sha512-4tvttepXG1VaYGrRibk5EwJd1t4udunSOVMdLSAL6mId1ix438oPwPZMALY41FCijukO1L0twNcGsdzS7dHgDg=="
-    },
-    "define-data-property@1.1.4": {
-      "integrity": "sha512-rBMvIzlpA8v6E+SJZoo++HAYqsLrkg7MSfIinMPFhmkorw7X+dOXVJQs+QT69zGkzMyfDnIMN2Wid1+NbL3T+A==",
-      "dependencies": [
-        "es-define-property",
-        "es-errors",
-        "gopd"
-      ]
-    },
-    "define-properties@1.2.1": {
-      "integrity": "sha512-8QmQKqEASLd5nx0U1B1okLElbUuuttJ/AnYmRXbbbGDWh6uS208EjD4Xqq/I9wK7u0v6O08XhTWnt5XtEbR6Dg==",
-      "dependencies": [
-        "define-data-property",
-        "has-property-descriptors",
-        "object-keys"
-      ]
-    },
-    "detect-node@2.1.0": {
-      "integrity": "sha512-T0NIuQpnTvFDATNuHN5roPwSBG83rFsuO+MXXH9/3N1eFbn4wcPjttvjMLEPWJ0RGUYgQE7cGgS3tNxbqCGM7g=="
     },
     "dom-serializer@2.0.0": {
       "integrity": "sha512-wIkAryiqt/nV5EQKqQpo3SToSOV9J0DnbJqwK7Wv/Trc92zIAYZ4FlMu+JPFW1DfGFt81ZTCGgDEabffXeLyJg==",
@@ -513,14 +343,6 @@
         "domhandler"
       ]
     },
-    "electron@28.3.3": {
-      "integrity": "sha512-ObKMLSPNhomtCOBAxFS8P2DW/4umkh72ouZUlUKzXGtYuPzgr1SYhskhFWgzAsPtUzhL2CzyV2sfbHcEW4CXqw==",
-      "dependencies": [
-        "@electron/get",
-        "@types/node@18.19.85",
-        "extract-zip"
-      ]
-    },
     "encoding-sniffer@0.2.0": {
       "integrity": "sha512-ju7Wq1kg04I3HtiYIOrUrdfdDvkyO9s5XM8QAj/bN61Yo/Vb4vgJxy5vi4Yxk01gWHbrofpPtpxM8bKger9jhg==",
       "dependencies": [
@@ -528,26 +350,8 @@
         "whatwg-encoding"
       ]
     },
-    "end-of-stream@1.4.4": {
-      "integrity": "sha512-+uw1inIHVPQoaVuHzRyXd21icM+cnt4CzD5rW+NC1wjOUSTOs+Te7FOv7AhN7vS9x/oIyhLP5PR1H+phQAHu5Q==",
-      "dependencies": [
-        "once"
-      ]
-    },
     "entities@4.5.0": {
       "integrity": "sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw=="
-    },
-    "env-paths@2.2.1": {
-      "integrity": "sha512-+h1lkLKhZMTYjog1VEpJNG7NZJWcuc2DDk/qsqSTRRCOXiLjeQ1d1/udrUGhqMxUgAlwKNZ0cf2uqan5GLuS2A=="
-    },
-    "es-define-property@1.0.1": {
-      "integrity": "sha512-e3nRfgfUZ4rNGL232gUgX06QNyyez04KdjFrF+LTRoOXmrOgFKDg4BCdsjW8EnT69eqdYGmRpJwiPVYNrCaW3g=="
-    },
-    "es-errors@1.3.0": {
-      "integrity": "sha512-Zf5H2Kxt2xjTvbJvP2ZWLEICxA6j+hAmMzIlypy4xcBg1vKVnx89Wy0GbS+kf5cwCVFFzdCFh2XSCFNULS6csw=="
-    },
-    "es6-error@4.1.1": {
-      "integrity": "sha512-Um/+FxMr9CISWh0bi5Zv0iOD+4cFh5qLeks1qhAopKVAJw3drgKbKySikp7wGhDL0HPeaja0P5ULZrxLkniUVg=="
     },
     "esbuild@0.25.2": {
       "integrity": "sha512-16854zccKPnC+toMywC+uKNeYSv+/eXkevRAfwRD/G9Cleq66m8XFIrigkbvauLLlCfDL45Q2cWegSg53gGBnQ==",
@@ -579,95 +383,14 @@
         "@esbuild/win32-x64"
       ]
     },
-    "escape-string-regexp@4.0.0": {
-      "integrity": "sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA=="
-    },
-    "extract-zip@2.0.1": {
-      "integrity": "sha512-GDhU9ntwuKyGXdZBUgTIe+vXnWj0fppUEtMDL0+idd5Sta8TGpHssn/eusA9mrPr9qNDym6SxAYZjNvCn/9RBg==",
-      "dependencies": [
-        "@types/yauzl",
-        "debug",
-        "get-stream",
-        "yauzl"
-      ]
-    },
-    "fd-slicer@1.1.0": {
-      "integrity": "sha512-cE1qsB/VwyQozZ+q1dGxR8LBYNZeofhEdUNGSMbQD3Gw2lAzX9Zb3uIU6Ebc/Fmyjo9AWWfnn0AUCHqtevs/8g==",
-      "dependencies": [
-        "pend"
-      ]
-    },
     "fdir@6.4.4_picomatch@4.0.2": {
       "integrity": "sha512-1NZP+GK4GfuAv3PqKvxQRDMjdSRZjnkq7KfhlNrCNNlZ0ygQFpebfrnfnq/W7fpUnAv9aGWmY1zKx7FYL3gwhg==",
       "dependencies": [
         "picomatch"
       ]
     },
-    "fs-extra@8.1.0": {
-      "integrity": "sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g==",
-      "dependencies": [
-        "graceful-fs",
-        "jsonfile",
-        "universalify"
-      ]
-    },
     "fsevents@2.3.3": {
       "integrity": "sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw=="
-    },
-    "get-stream@5.2.0": {
-      "integrity": "sha512-nBF+F1rAZVCu/p7rjzgA+Yb4lfYXrpl7a6VmJrU8wF9I1CKvP/QwPNZHnOlwbTkY6dvtFIzFMSyQXbLoTQPRpA==",
-      "dependencies": [
-        "pump"
-      ]
-    },
-    "global-agent@3.0.0": {
-      "integrity": "sha512-PT6XReJ+D07JvGoxQMkT6qji/jVNfX/h364XHZOWeRzy64sSFr+xJ5OX7LI3b4MPQzdL4H8Y8M0xzPpsVMwA8Q==",
-      "dependencies": [
-        "boolean",
-        "es6-error",
-        "matcher",
-        "roarr",
-        "semver@7.7.1",
-        "serialize-error"
-      ]
-    },
-    "globalthis@1.0.4": {
-      "integrity": "sha512-DpLKbNU4WylpxJykQujfCcwYWiV/Jhm50Goo0wrVILAv5jOr9d+H+UR3PhSCD2rCCEIg0uc+G+muBTwD54JhDQ==",
-      "dependencies": [
-        "define-properties",
-        "gopd"
-      ]
-    },
-    "gopd@1.2.0": {
-      "integrity": "sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg=="
-    },
-    "got@11.8.6": {
-      "integrity": "sha512-6tfZ91bOr7bOXnK7PRDCGBLa1H4U080YHNaAQ2KsMGlLEzRbk44nsZF2E1IeRc3vtJHPVbKCYgdFbaGO2ljd8g==",
-      "dependencies": [
-        "@sindresorhus/is",
-        "@szmarczak/http-timer",
-        "@types/cacheable-request",
-        "@types/responselike",
-        "cacheable-lookup",
-        "cacheable-request",
-        "decompress-response",
-        "http2-wrapper",
-        "lowercase-keys",
-        "p-cancelable",
-        "responselike"
-      ]
-    },
-    "graceful-fs@4.2.11": {
-      "integrity": "sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ=="
-    },
-    "has-property-descriptors@1.0.2": {
-      "integrity": "sha512-55JNKuIW+vq4Ke1BjOTjM2YctQIvCT7GFzHwmfZPGo5wnrgkid0YQtnAleFSqumZm4az3n2BS+erby5ipJdgrg==",
-      "dependencies": [
-        "es-define-property"
-      ]
-    },
-    "hono@4.7.5": {
-      "integrity": "sha512-fDOK5W2C1vZACsgLONigdZTRZxuBqFtcKh7bUQ5cVSbwI2RWjloJDcgFOVzbQrlI6pCmhlTsVYZ7zpLj4m4qMQ=="
     },
     "hono@4.7.7": {
       "integrity": "sha512-2PCpQRbN87Crty8/L/7akZN3UyZIAopSoRxCwRbJgUuV1+MHNFHzYFxZTg4v/03cXUm+jce/qa2VSBZpKBm3Qw=="
@@ -681,87 +404,20 @@
         "entities"
       ]
     },
-    "http-cache-semantics@4.1.1": {
-      "integrity": "sha512-er295DKPVsV82j5kw1Gjt+ADA/XYHsajl82cGNQG2eyoPkvgUhX+nDIyelzhIWbbsXP39EHcI6l5tYs2FYqYXQ=="
-    },
-    "http2-wrapper@1.0.3": {
-      "integrity": "sha512-V+23sDMr12Wnz7iTcDeJr3O6AIxlnvT/bmaAAAP/Xda35C90p9599p0F1eHR/N1KILWSoWVAiOMFjBBXaXSMxg==",
-      "dependencies": [
-        "quick-lru",
-        "resolve-alpn"
-      ]
-    },
     "iconv-lite@0.6.3": {
       "integrity": "sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==",
       "dependencies": [
         "safer-buffer"
       ]
     },
-    "json-buffer@3.0.1": {
-      "integrity": "sha512-4bV5BfR2mqfQTJm+V5tPPdf+ZpuhiIvTuAB5g8kcrXOZpTT/QwwVRWBywX1ozr6lEuPdbHxwaJlm9G6mI2sfSQ=="
-    },
-    "json-stringify-safe@5.0.1": {
-      "integrity": "sha512-ZClg6AaYvamvYEE82d3Iyd3vSSIjQ+odgjaTzRuO3s7toCdFKczob2i0zCh7JE8kWn17yvAWhUVxvqGwUalsRA=="
-    },
-    "jsonfile@4.0.0": {
-      "integrity": "sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==",
-      "dependencies": [
-        "graceful-fs"
-      ]
-    },
-    "keyv@4.5.4": {
-      "integrity": "sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==",
-      "dependencies": [
-        "json-buffer"
-      ]
-    },
-    "lowercase-keys@2.0.0": {
-      "integrity": "sha512-tqNXrS78oMOE73NMxK4EMLQsQowWf8jKooH9g7xPavRT706R6bkQJ6DY2Te7QukaZsulxa30wQ7bk0pm4XiHmA=="
-    },
-    "matcher@3.0.0": {
-      "integrity": "sha512-OkeDaAZ/bQCxeFAozM55PKcKU0yJMPGifLwV4Qgjitu+5MoAfSQN4lsLJeXZ1b8w0x+/Emda6MZgXS1jvsapng==",
-      "dependencies": [
-        "escape-string-regexp"
-      ]
-    },
-    "mimic-response@1.0.1": {
-      "integrity": "sha512-j5EctnkH7amfV/q5Hgmoal1g2QHFJRraOtmx0JpIqkxhBhI/lJSl1nMpQ45hVarwNETOoWEimndZ4QK0RHxuxQ=="
-    },
-    "mimic-response@3.1.0": {
-      "integrity": "sha512-z0yWI+4FDrrweS8Zmt4Ej5HdJmky15+L2e6Wgn3+iK5fWzb6T3fhNFq2+MeTRb064c6Wr4N/wv0DzQTjNzHNGQ=="
-    },
-    "minimatch@9.0.5": {
-      "integrity": "sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow==",
-      "dependencies": [
-        "brace-expansion"
-      ]
-    },
-    "ms@2.1.3": {
-      "integrity": "sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA=="
-    },
     "nanoid@3.3.11": {
       "integrity": "sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w=="
-    },
-    "normalize-url@6.1.0": {
-      "integrity": "sha512-DlL+XwOy3NxAQ8xuC0okPgK46iuVNAK01YN7RueYBqqFeGsBjV9XmCAzAdgt+667bCl5kPh9EqKKDwnaPG1I7A=="
     },
     "nth-check@2.1.1": {
       "integrity": "sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==",
       "dependencies": [
         "boolbase"
       ]
-    },
-    "object-keys@1.1.1": {
-      "integrity": "sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA=="
-    },
-    "once@1.4.0": {
-      "integrity": "sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==",
-      "dependencies": [
-        "wrappy"
-      ]
-    },
-    "p-cancelable@2.1.1": {
-      "integrity": "sha512-BZOr3nRQHOntUjTrH8+Lh54smKHoHyur8We1V8DSMVrl5A2malOOwuJRnKRDjSnkoeBh4at6BwEnb5I7Jl31wg=="
     },
     "parse5-htmlparser2-tree-adapter@7.1.0": {
       "integrity": "sha512-ruw5xyKs6lrpo9x9rCZqZZnIUntICjQAd0Wsmp396Ul9lN/h+ifgVV1x1gZHi8euej6wTfpqX8j+BFQxF0NS/g==",
@@ -782,9 +438,6 @@
         "entities"
       ]
     },
-    "pend@1.2.0": {
-      "integrity": "sha512-F3asv42UuXchdzt+xXqfW1OGlVBe+mxa2mqI0pg5yAHZPvFmY3Y6drSf/GQ1A86WgWEN9Kzh/WrgKa6iGcHXLg=="
-    },
     "picocolors@1.1.1": {
       "integrity": "sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA=="
     },
@@ -799,38 +452,15 @@
         "source-map-js"
       ]
     },
-    "progress@2.0.3": {
-      "integrity": "sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA=="
-    },
-    "pump@3.0.2": {
-      "integrity": "sha512-tUPXtzlGM8FE3P0ZL6DVs/3P58k9nk8/jZeQCurTJylQA8qFYzHFfhBJkuqyE0FifOsQ0uKWekiZ5g8wtr28cw==",
+    "react-dom@19.1.0_react@19.0.0": {
+      "integrity": "sha512-Xs1hdnE+DyKgeHJeJznQmYMIBG3TKIHJJT95Q58nHLSrElKlGQqDTR2HQ9fx5CN/Gk6Vh/kupBTDLU11/nDk/g==",
       "dependencies": [
-        "end-of-stream",
-        "once"
+        "react",
+        "scheduler"
       ]
     },
-    "quick-lru@5.1.1": {
-      "integrity": "sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA=="
-    },
-    "resolve-alpn@1.2.1": {
-      "integrity": "sha512-0a1F4l73/ZFZOakJnQ3FvkJ2+gSTQWz/r2KE5OdDY0TxPm5h4GkqkWWfM47T7HsbnOtcJVEF4epCVy6u7Q3K+g=="
-    },
-    "responselike@2.0.1": {
-      "integrity": "sha512-4gl03wn3hj1HP3yzgdI7d3lCkF95F21Pz4BPGvKHinyQzALR5CapwC8yIi0Rh58DEMQ/SguC03wFj2k0M/mHhw==",
-      "dependencies": [
-        "lowercase-keys"
-      ]
-    },
-    "roarr@2.15.4": {
-      "integrity": "sha512-CHhPh+UNHD2GTXNYhPWLnU8ONHdI+5DI+4EYIAOaiD63rHeYlZvyh8P+in5999TTSFgUYuKUAjzRI4mdh/p+2A==",
-      "dependencies": [
-        "boolean",
-        "detect-node",
-        "globalthis",
-        "json-stringify-safe",
-        "semver-compare",
-        "sprintf-js"
-      ]
+    "react@19.0.0": {
+      "integrity": "sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ=="
     },
     "rollup@4.40.0": {
       "integrity": "sha512-Noe455xmA96nnqH5piFtLobsGbCij7Tu+tb3c1vYjNbTkfzGqXqQXG3wJaYXkRZuQ0vEYN4bhwg7QnIrqB5B+w==",
@@ -862,32 +492,11 @@
     "safer-buffer@2.1.2": {
       "integrity": "sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg=="
     },
-    "semver-compare@1.0.0": {
-      "integrity": "sha512-YM3/ITh2MJ5MtzaM429anh+x2jiLVjqILF4m4oyQB18W7Ggea7BfqdH/wGMK7dDiMghv/6WG7znWMwUDzJiXow=="
-    },
-    "semver@6.3.1": {
-      "integrity": "sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA=="
-    },
-    "semver@7.7.1": {
-      "integrity": "sha512-hlq8tAfn0m/61p4BVRcPzIGr6LKiMwo4VM6dGi6pt4qcRkmNzTcWq6eCEjEh+qXjkMDvPlOFFSGwQjoEa6gyMA=="
-    },
-    "serialize-error@7.0.1": {
-      "integrity": "sha512-8I8TjW5KMOKsZQTvoxjuSIa7foAwPWGOts+6o7sgjz41/qMD9VQHEDxi6PBvK2l0MXUmqZyNpUK+T2tQaaElvw==",
-      "dependencies": [
-        "type-fest"
-      ]
+    "scheduler@0.26.0": {
+      "integrity": "sha512-NlHwttCI/l5gCPR3D1nNXtWABUmBwvZpEQiD4IXSbIDq8BzLIK/7Ir5gTFSGZDUu37K5cMNp0hFtzO38sC7gWA=="
     },
     "source-map-js@1.2.1": {
       "integrity": "sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA=="
-    },
-    "sprintf-js@1.1.3": {
-      "integrity": "sha512-Oo+0REFV59/rz3gfJNKQiBlwfHaSESl1pcGyABQsnnIfWOFt6JNj5gCog2U6MLZ//IGYD+nA8nI+mTShREReaA=="
-    },
-    "sumchecker@3.0.1": {
-      "integrity": "sha512-MvjXzkz/BOfyVDkG0oFOtBxHX2u3gKbMHIF/dXblZsgD3BWOFLmHovIpZY7BykJdAjcqRCBi1WYBNdEC9yI7vg==",
-      "dependencies": [
-        "debug"
-      ]
     },
     "tinyglobby@0.2.13_picomatch@4.0.2": {
       "integrity": "sha512-mEwzpUgrLySlveBwEVDMKk5B57bhLPYovRfPAXD5gA/98Opn0rCDj3GtLwFvCvH5RK9uPCExUROW5NjDwvqkxw==",
@@ -896,11 +505,8 @@
         "picomatch"
       ]
     },
-    "type-fest@0.13.1": {
-      "integrity": "sha512-34R7HTnG0XIJcBSn5XhDd7nNFPRcXYRZrBB2O2jdKqYODldSzBAqzsWoZYYvduky73toYS/ESqxPvkDf/F0XMg=="
-    },
-    "undici-types@5.26.5": {
-      "integrity": "sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA=="
+    "tslib@2.8.1": {
+      "integrity": "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w=="
     },
     "undici-types@6.20.0": {
       "integrity": "sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg=="
@@ -908,23 +514,22 @@
     "undici@6.21.2": {
       "integrity": "sha512-uROZWze0R0itiAKVPsYhFov9LxrPMHLMEQFszeI2gCN6bnIIZ8twzBCJcN2LJrBBLfrP0t1FW0g+JmKVl8Vk1g=="
     },
-    "universalify@0.1.2": {
-      "integrity": "sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg=="
-    },
-    "vite@6.2.4_@types+node@22.12.0": {
-      "integrity": "sha512-veHMSew8CcRzhL5o8ONjy8gkfmFJAd5Ac16oxBUjlwgX3Gq2Wqr+qNC3TjPIpy7TPV/KporLga5GT9HqdrCizw==",
-      "dependencies": [
-        "@types/node@22.12.0",
-        "esbuild",
-        "fsevents",
-        "postcss",
-        "rollup"
-      ]
-    },
-    "vite@6.3.2_@types+node@22.12.0_picomatch@4.0.2": {
+    "vite@6.3.2_picomatch@4.0.2": {
       "integrity": "sha512-ZSvGOXKGceizRQIZSz7TGJ0pS3QLlVY/9hwxVh17W3re67je1RKYzFHivZ/t0tubU78Vkyb9WnHPENSBCzbckg==",
       "dependencies": [
-        "@types/node@22.12.0",
+        "esbuild",
+        "fdir",
+        "fsevents",
+        "picomatch",
+        "postcss",
+        "rollup",
+        "tinyglobby"
+      ]
+    },
+    "vite@6.3.2_picomatch@4.0.2_@types+node@22.12.0": {
+      "integrity": "sha512-ZSvGOXKGceizRQIZSz7TGJ0pS3QLlVY/9hwxVh17W3re67je1RKYzFHivZ/t0tubU78Vkyb9WnHPENSBCzbckg==",
+      "dependencies": [
+        "@types/node",
         "esbuild",
         "fdir",
         "fsevents",
@@ -943,16 +548,6 @@
     "whatwg-mimetype@4.0.0": {
       "integrity": "sha512-QaKxh0eNIi2mE9p2vEdzfagOKHCcj1pJ56EEHGQOVxp8r9/iszLUUV7v89x9O1p/T+NlTM5W7jW6+cz4Fq1YVg=="
     },
-    "wrappy@1.0.2": {
-      "integrity": "sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ=="
-    },
-    "yauzl@2.10.0": {
-      "integrity": "sha512-p4a9I6X6nu6IhoGmBqAcbJy1mlC4j27vEPZX9F4L4/vZT3Lyq1VkFHw/V/PUcB9Buo+DG3iHkT0x3Qya58zc3g==",
-      "dependencies": [
-        "buffer-crc32",
-        "fd-slicer"
-      ]
-    },
     "zod@3.24.3": {
       "integrity": "sha512-HhY1oqzWCQWuUqvBFnsyrtZRhyPeR7SUGv+C4+MsisMuVfSPx8HpwWqH8tRahSlt6M3PiFAcoeFhZAqIXTxoSg=="
     }
@@ -963,6 +558,7 @@
       "npm:@deno/vite-plugin@*",
       "npm:@hono/zod-validator@*",
       "npm:@tauri-apps/cli@*",
+      "npm:@tauri-apps/plugin-http@*",
       "npm:cheerio@*",
       "npm:esbuild@*",
       "npm:hono@*",

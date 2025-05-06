@@ -23,11 +23,11 @@ async function listSchedule(f: typeof fetch) {
   return hrefs;
 }
 
-function fetchSchedules(hrefs: string[]) {
+function fetchSchedules(f: typeof fetch, hrefs: string[]) {
   return Promise.all(hrefs.map(async (href) => {
     const group = href.replace(/[^0-9]/g, "");
 
-    const res = await fetch(`${WEBSITE_HOST}/${href}`);
+    const res = await f(`${WEBSITE_HOST}/${href}`);
     const html = await res.text();
 
     return [group, cheerio.load(html)] as const;
@@ -137,7 +137,7 @@ function transform(
 
 export async function buildSchedule(f: typeof fetch) {
   const hrefs = await listSchedule(f);
-  const schedules = await fetchSchedules(hrefs);
+  const schedules = await fetchSchedules(f, hrefs);
   const schedule = transform(parse(schedules));
 
   return schedule;

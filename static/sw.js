@@ -5,10 +5,14 @@ self.addEventListener("fetch", async (event) => {
 
   try {
     const response = await fetch(event.request);
-    cache.put(event.request, response.clone());
+    if (event.request.method === "GET" && response.status === 200) {
+      cache.put(event.request, response.clone());
+    }
     return response;
   } catch (_) {
-    const cached = await cache.match(event.request);
-    return cached ?? await caches.match("/offline.html");
+    if (event.request.method === "GET") {
+      const cached = await cache.match(event.request);
+      return cached ?? await caches.match("/offline.html");
+    }
   }
 });

@@ -4,6 +4,7 @@
     "@hono/zod-validator": "npm:@hono/zod-validator",
     "@std/toml": "jsr:@std/toml",
     "@tauri-apps/cli": "npm:@tauri-apps/cli",
+    "@tauri-apps/plugin-http": "npm:@tauri-apps/plugin-http",
     "cheerio": "npm:cheerio",
     "esbuild": "npm:esbuild",
     "hono": "npm:hono",
