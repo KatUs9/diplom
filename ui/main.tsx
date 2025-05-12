@@ -5,9 +5,10 @@ import type { Api } from "../server/api.ts";
 import { getAudiences } from "../audiences.ts";
 import { buildSchedule, type Lesson } from "../schedule.ts";
 import { useHistoryState } from "./reactive-history.ts";
-import { COMPUTER_ICON } from "../constants.ts";
+import { COMPUTER_ICON, PRIORITIZED_KEY_NAME } from "../constants.ts";
 import { fetch as tauriFetch } from "@tauri-apps/plugin-http";
 import { useLoadingDots } from "./use-loading-dots.ts";
+import { config } from "../config/tauri.ts";
 
 if (__ENV__ == "web") {
   addEventListener("load", async () => {
@@ -90,12 +91,24 @@ function UploadView({ onChange }: { onChange?: (schedule: Schedule) => void }) {
     try {
       setIsLoading(true);
 
-      const schedule = await buildSchedule(tauriFetch);
-      onChange?.({ audiences: getAudiences(schedule), lessons: schedule });
+      const [schedule, cfg] = await Promise.all([
+        buildSchedule(tauriFetch),
+        config(),
+      ]);
+      const prioritizedSchedule = {
+        ...schedule,
+        [PRIORITIZED_KEY_NAME]: cfg.schedule.computer_audiences,
+      };
+      onChange?.({
+        audiences: getAudiences(prioritizedSchedule),
+        lessons: schedule,
+      });
 
       const a = document.createElement("a");
       a.href = URL.createObjectURL(
-        new Blob([JSON.stringify(schedule)], { type: "application/json" }),
+        new Blob([JSON.stringify(prioritizedSchedule)], {
+          type: "application/json",
+        }),
       );
       a.download = "schedule.json";
       a.click();

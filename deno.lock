@@ -9,7 +9,9 @@
     "npm:@hono/zod-validator@*": "0.4.3_hono@4.7.7_zod@3.24.3",
     "npm:@tauri-apps/cli@*": "2.5.0",
     "npm:@tauri-apps/cli@2.5.0": "2.5.0",
+    "npm:@tauri-apps/plugin-fs@^2.2.1": "2.2.1",
     "npm:@tauri-apps/plugin-http@*": "2.4.3",
+    "npm:@tauri-apps/plugin-os@^2.2.1": "2.2.1",
     "npm:@types/node@*": "22.12.0",
     "npm:cheerio@*": "1.0.0",
     "npm:esbuild@*": "0.25.2",
@@ -260,8 +262,20 @@
         "@tauri-apps/cli-win32-x64-msvc"
       ]
     },
+    "@tauri-apps/plugin-fs@2.2.1": {
+      "integrity": "sha512-KdGzvvA4Eg0Dhw55MwczFbjxLxsTx0FvwwC/0StXlr6IxwPUxh5ziZQoaugkBFs8t+wfebdQrjBEzd8NmmDXNw==",
+      "dependencies": [
+        "@tauri-apps/api"
+      ]
+    },
     "@tauri-apps/plugin-http@2.4.3": {
       "integrity": "sha512-Us8X+FikzpaZRNr4kH4HLwyXascHbM42p6LxAqRTQnHPrrqp1usaH4vxWAZalPvTbHJ3gBEMJPHusFJgtjGJjA==",
+      "dependencies": [
+        "@tauri-apps/api"
+      ]
+    },
+    "@tauri-apps/plugin-os@2.2.1": {
+      "integrity": "sha512-cNYpNri2CCc6BaNeB6G/mOtLvg8dFyFQyCUdf2y0K8PIAKGEWdEcu8DECkydU2B+oj4OJihDPD2de5K6cbVl9A==",
       "dependencies": [
         "@tauri-apps/api"
       ]
@@ -558,7 +572,9 @@
       "npm:@deno/vite-plugin@*",
       "npm:@hono/zod-validator@*",
       "npm:@tauri-apps/cli@*",
+      "npm:@tauri-apps/plugin-fs@^2.2.1",
       "npm:@tauri-apps/plugin-http@*",
+      "npm:@tauri-apps/plugin-os@^2.2.1",
       "npm:cheerio@*",
       "npm:esbuild@*",
       "npm:hono@*",
