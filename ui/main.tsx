@@ -292,34 +292,7 @@ function ScheduleView(
                               const l = day.find(({ time }) => time == slot);
 
                               return (
-                                <tr key={slot}>
-                                  <td>{slot}</td>
-                                  {l
-                                    ? (
-                                      <>
-                                        <td>
-                                          <img
-                                            alt={week[l.week]}
-                                            src={`/assets/${l.week}.svg`}
-                                            loading="lazy"
-                                            decoding="async"
-                                            title={week[l.week]}
-                                          />
-                                        </td>
-                                        <td>{l.group}</td>
-                                        <td>{l.subject}</td>
-                                        <td>{l.teacher}</td>
-                                      </>
-                                    )
-                                    : (
-                                      <td
-                                        colspan={4}
-                                        style={{ textAlign: "center" }}
-                                      >
-                                        Свободно
-                                      </td>
-                                    )}
-                                </tr>
+                                <Lesson key={slot} slot={slot} lesson={l} />
                               );
                             })}
                           </tbody>
@@ -333,6 +306,64 @@ function ScheduleView(
           )}
       </main>
     </>
+  );
+}
+
+function Lesson({ slot, lesson: l }: { slot: string; lesson?: Lesson }) {
+  return (
+    <>
+      <tr>
+        <td>{slot}</td>
+        {l
+          ? (
+            <>
+              <td>
+                <Week name={l.week} />
+              </td>
+              <td>{l.group}</td>
+              <td>{l.subject}</td>
+              <td>{l.teacher}</td>
+            </>
+          )
+          : (
+            <>
+              <td>
+                <Week name="both" />
+              </td>
+              <td
+                colspan={4}
+                style={{ textAlign: "center" }}
+                data-print="hide"
+              >
+                Свободно
+              </td>
+            </>
+          )}
+      </tr>
+      {l && l.week != "both" && (
+        <tr>
+          <td>{slot}</td>
+          <td>
+            <Week name={l.week == "up" ? "down" : "up"} />
+          </td>
+          <td colspan={3} style={{ textAlign: "center" }} data-print="hide">
+            Свободно
+          </td>
+        </tr>
+      )}
+    </>
+  );
+}
+
+function Week({ name }: { name: string }) {
+  return (
+    <img
+      alt={week[name]}
+      src={`/assets/${name}.svg`}
+      loading="lazy"
+      decoding="async"
+      title={week[name]}
+    />
   );
 }
 
