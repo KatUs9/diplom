@@ -25,6 +25,26 @@ type Schedule = {
   lessons: Record<string, Record<string, Lesson[][]>> | null;
 };
 
+const days = [
+  "Понедельник",
+  "Вторник",
+  "Среда",
+  "Четверг",
+  "Пятница",
+  "Суббота",
+];
+
+const timeSlots = [
+  "08:30-10:00",
+  "10:10-11:40",
+  "11:50-13:20",
+  "14:00-15:30",
+  "15:40-17:10",
+  "17:20-18:50",
+  "19:00-20:30",
+  "20:40-22:10",
+];
+
 function parseAudiencesScriptTag() {
   return {
     audiences: z.record(z.array(z.string())).parse(
@@ -47,31 +67,11 @@ function today() {
   return `${formatted} ${week} неделя`;
 }
 
-const days = [
-  "Понедельник",
-  "Вторник",
-  "Среда",
-  "Четверг",
-  "Пятница",
-  "Суббота",
-];
+function teacher(name: string) {
+  const [second, first, middle] = name.split(" ");
 
-const week: Record<string, string> = {
-  up: "Верхняя",
-  down: "Нижняя",
-  both: "Обе",
-};
-
-const timeSlots = [
-  "08:30-10:00",
-  "10:10-11:40",
-  "11:50-13:20",
-  "14:00-15:30",
-  "15:40-17:10",
-  "17:20-18:50",
-  "19:00-20:30",
-  "20:40-22:10",
-];
+  return `${second} ${first[0]}.${middle[0]}.`;
+}
 
 function App() {
   const [schedule, setSchedule] = useState<Schedule | null>(
@@ -273,97 +273,64 @@ function ScheduleView(
 
               <div id="schedule">
                 <div class="positioner">
-                  {audienceLessons.map((day, i) =>
-                    day
-                      ? (
-                        <table>
-                          <caption>{days[i]}</caption>
-                          <thead>
-                            <tr>
-                              <td>Время</td>
-                              <td>Неделя</td>
-                              <td>Группы</td>
-                              <td>Предмет</td>
-                              <td>Преподаватель</td>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {timeSlots.map((slot) => {
-                              const l = day.find(({ time }) => time == slot);
+                  <table>
+                    <thead>
+                      <tr>
+                        <th scope="col">{building} {audience}</th>
+                        {days.map((day) => (
+                          <th key={day} scope="col">
+                            {day}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {timeSlots.map((slot) => (
+                        <tr key={slot}>
+                          <th scope="row">{slot.split("-")[0]}</th>
+                          {audienceLessons.map((day, i) => {
+                            const l = day.find(({ time }) => time == slot);
 
-                              return (
-                                <Lesson key={slot} slot={slot} lesson={l} />
-                              );
-                            })}
-                          </tbody>
-                        </table>
-                      )
-                      : null
-                  )}
+                            return (
+                              <td key={i}>
+                                {l?.week == "down"
+                                  ? (
+                                    <>
+                                      ————————
+                                      <br />
+                                    </>
+                                  )
+                                  : null}
+                                {l
+                                  ? (
+                                    <>
+                                      {l.group}
+                                      <br />
+                                      {teacher(l.teacher)}
+                                    </>
+                                  )
+                                  : null}
+                                {l?.week == "up"
+                                  ? (
+                                    <>
+                                      <br />
+                                      ————————
+                                    </>
+                                  )
+                                  : null}
+                              </td>
+                            );
+                          })}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </>
           )}
       </main>
     </>
-  );
-}
-
-function Lesson({ slot, lesson: l }: { slot: string; lesson?: Lesson }) {
-  return (
-    <>
-      <tr>
-        <td>{slot}</td>
-        {l
-          ? (
-            <>
-              <td>
-                <Week name={l.week} />
-              </td>
-              <td>{l.group}</td>
-              <td>{l.subject}</td>
-              <td>{l.teacher}</td>
-            </>
-          )
-          : (
-            <>
-              <td>
-                <Week name="both" />
-              </td>
-              <td
-                colspan={4}
-                style={{ textAlign: "center" }}
-                data-print="hide"
-              >
-                Свободно
-              </td>
-            </>
-          )}
-      </tr>
-      {l && l.week != "both" && (
-        <tr>
-          <td>{slot}</td>
-          <td>
-            <Week name={l.week == "up" ? "down" : "up"} />
-          </td>
-          <td colspan={3} style={{ textAlign: "center" }} data-print="hide">
-            Свободно
-          </td>
-        </tr>
-      )}
-    </>
-  );
-}
-
-function Week({ name }: { name: string }) {
-  return (
-    <img
-      alt={week[name]}
-      src={`/assets/${name}.svg`}
-      loading="lazy"
-      decoding="async"
-      title={week[name]}
-    />
   );
 }
 
