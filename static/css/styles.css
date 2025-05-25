@@ -70,6 +70,10 @@ select:last-child {
   padding: 0 0.75rem;
 }
 
+.scrollable {
+  overflow-x: auto;
+}
+
 .text-center {
   text-align: center;
 }

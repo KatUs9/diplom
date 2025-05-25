@@ -272,7 +272,7 @@ function ScheduleView(
               </div>
 
               <div id="schedule">
-                <div class="positioner">
+                <div class="positioner scrollable">
                   <table>
                     <thead>
                       <tr>
