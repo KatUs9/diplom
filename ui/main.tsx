@@ -112,6 +112,11 @@ function UploadView({ onChange }: { onChange?: (schedule: Schedule) => void }) {
       );
       a.download = "schedule.json";
       a.click();
+    } catch (e: unknown) {
+      let message = "Неизвестная ошибка";
+      if (e instanceof Error) message = e.message;
+      else if (typeof e === "string") message = e;
+      alert("Ошибка при формировании: " + message);
     } finally {
       setIsLoading(false);
     }
