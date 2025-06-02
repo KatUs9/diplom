@@ -9,12 +9,20 @@
     "npm:@hono/zod-validator@*": "0.4.3_hono@4.7.7_zod@3.24.3",
     "npm:@tauri-apps/cli@*": "2.5.0",
     "npm:@tauri-apps/cli@2.5.0": "2.5.0",
+    "npm:@tauri-apps/plugin-dialog@*": "2.2.2",
+    "npm:@tauri-apps/plugin-dialog@^2.2.2": "2.2.2",
+    "npm:@tauri-apps/plugin-fs@*": "2.2.1",
     "npm:@tauri-apps/plugin-fs@^2.2.1": "2.2.1",
     "npm:@tauri-apps/plugin-http@*": "2.4.3",
+    "npm:@tauri-apps/plugin-os@*": "2.2.1",
     "npm:@tauri-apps/plugin-os@^2.2.1": "2.2.1",
     "npm:@types/node@*": "22.12.0",
+    "npm:@types/wicg-file-system-access@*": "2023.10.6",
+    "npm:@types/wicg-file-system-access@^2023.10.6": "2023.10.6",
     "npm:cheerio@*": "1.0.0",
     "npm:esbuild@*": "0.25.2",
+    "npm:fetch-retry@*": "6.0.0",
+    "npm:fetch-retry@6": "6.0.0",
     "npm:hono@*": "4.7.7",
     "npm:vite@*": "6.3.2_picomatch@4.0.2_@types+node@22.12.0",
     "npm:vite@6.3.2": "6.3.2_picomatch@4.0.2_@types+node@22.12.0",
@@ -262,6 +270,12 @@
         "@tauri-apps/cli-win32-x64-msvc"
       ]
     },
+    "@tauri-apps/plugin-dialog@2.2.2": {
+      "integrity": "sha512-Pm9qnXQq8ZVhAMFSEPwxvh+nWb2mk7LASVlNEHYaksHvcz8P6+ElR5U5dNL9Ofrm+uwhh1/gYKWswK8JJJAh6A==",
+      "dependencies": [
+        "@tauri-apps/api"
+      ]
+    },
     "@tauri-apps/plugin-fs@2.2.1": {
       "integrity": "sha512-KdGzvvA4Eg0Dhw55MwczFbjxLxsTx0FvwwC/0StXlr6IxwPUxh5ziZQoaugkBFs8t+wfebdQrjBEzd8NmmDXNw==",
       "dependencies": [
@@ -288,6 +302,9 @@
       "dependencies": [
         "undici-types"
       ]
+    },
+    "@types/wicg-file-system-access@2023.10.6": {
+      "integrity": "sha512-YO/183gNRzZFSdKu+ikkD7ambAj4PhgjFAF2A/Mw/7wroSF6ne8r804RkpZzqrJ/F6DO2/IYlQF/ULOZ/bhKyA=="
     },
     "boolbase@1.0.0": {
       "integrity": "sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww=="
@@ -402,6 +419,9 @@
       "dependencies": [
         "picomatch"
       ]
+    },
+    "fetch-retry@6.0.0": {
+      "integrity": "sha512-BUFj1aMubgib37I3v4q78fYo63Po7t4HUPTpQ6/QE6yK6cIQrP+W43FYToeTEyg5m2Y7eFUtijUuAv/PDlWuag=="
     },
     "fsevents@2.3.3": {
       "integrity": "sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw=="
@@ -572,11 +592,14 @@
       "npm:@deno/vite-plugin@*",
       "npm:@hono/zod-validator@*",
       "npm:@tauri-apps/cli@*",
-      "npm:@tauri-apps/plugin-fs@^2.2.1",
+      "npm:@tauri-apps/plugin-dialog@*",
+      "npm:@tauri-apps/plugin-fs@*",
       "npm:@tauri-apps/plugin-http@*",
-      "npm:@tauri-apps/plugin-os@^2.2.1",
+      "npm:@tauri-apps/plugin-os@*",
+      "npm:@types/wicg-file-system-access@*",
       "npm:cheerio@*",
       "npm:esbuild@*",
+      "npm:fetch-retry@*",
       "npm:hono@*",
       "npm:vite@*",
       "npm:zod@*"

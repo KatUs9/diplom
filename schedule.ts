@@ -1,4 +1,6 @@
 import * as cheerio from "cheerio";
+import retry from "fetch-retry";
+import { chunk } from "./utils/chunk.ts";
 
 export type Lesson = {
   time: string;
@@ -12,7 +14,11 @@ export type Lesson = {
 const WEBSITE_HOST = "https://www.smtu.ru";
 
 async function listSchedule(f: typeof fetch) {
-  const res = await f(`${WEBSITE_HOST}/ru/listschedule/`);
+  const res = await retry(f)(`${WEBSITE_HOST}/ru/listschedule/`, {
+    retries: 3,
+    retryDelay: 1000,
+    signal: AbortSignal.timeout(15000),
+  });
   const html = await res.text();
   const $ = cheerio.load(html);
 
@@ -23,15 +29,27 @@ async function listSchedule(f: typeof fetch) {
   return hrefs;
 }
 
-function fetchSchedules(f: typeof fetch, hrefs: string[]) {
-  return Promise.all(hrefs.map(async (href) => {
+function fetchSchedules(
+  f: typeof fetch,
+  hrefs: string[],
+  options?: { onResponse?: (res: Response) => void },
+) {
+  const { onResponse } = options ?? {};
+
+  return chunk(hrefs, 10, async (href) => {
     const group = href.replace(/[^0-9]/g, "");
 
-    const res = await f(`${WEBSITE_HOST}/${href}`);
+    const res = await retry(f)(`${WEBSITE_HOST}${href}`, {
+      retries: 3,
+      retryDelay: 1000,
+      signal: AbortSignal.timeout(15000),
+    });
     const html = await res.text();
 
+    onResponse?.(res);
+
     return [group, cheerio.load(html)] as const;
-  }));
+  });
 }
 
 function parse(schedules: (readonly [string, cheerio.CheerioAPI])[]) {
@@ -135,9 +153,22 @@ function transform(
   return schedule;
 }
 
-export async function buildSchedule(f: typeof fetch) {
+export async function buildSchedule(
+  f: typeof fetch,
+  options?: { onProgress: (pct: number) => void },
+) {
+  const { onProgress } = options ?? {};
+
   const hrefs = await listSchedule(f);
-  const schedules = await fetchSchedules(f, hrefs);
+
+  let nFinished = 0;
+
+  const schedules = await fetchSchedules(f, hrefs, {
+    onResponse() {
+      nFinished += 1;
+      onProgress?.(Math.round(100 * nFinished / hrefs.length));
+    },
+  });
   const schedule = transform(parse(schedules));
 
   return schedule;
