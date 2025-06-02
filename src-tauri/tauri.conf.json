@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Schedule App",
+  "productName": "Расписание аудиторий СПбГМТУ",
   "version": "0.1.0",
   "identifier": "com.smtu.schedule",
   "build": {
