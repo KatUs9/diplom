@@ -7,7 +7,6 @@ import { buildSchedule, type Lesson } from "../schedule.ts";
 import { useHistoryState } from "./reactive-history.ts";
 import { COMPUTER_ICON, PRIORITIZED_KEY_NAME } from "../constants.ts";
 import { fetch as tauriFetch } from "@tauri-apps/plugin-http";
-import { useLoadingDots } from "./use-loading-dots.ts";
 import { config } from "../config/tauri.ts";
 
 if (__ENV__ == "web") {
@@ -85,14 +84,17 @@ function App() {
 
 function UploadView({ onChange }: { onChange?: (schedule: Schedule) => void }) {
   const [isLoading, setIsLoading] = useState(false);
-  const dots = useLoadingDots(isLoading);
+  const [pctProgress, setPctProgress] = useState<number | null>(null);
 
   const handleDownload = async () => {
     try {
       setIsLoading(true);
+      setPctProgress(0);
 
       const [schedule, cfg] = await Promise.all([
-        buildSchedule(tauriFetch),
+        buildSchedule(tauriFetch, {
+          onProgress: setPctProgress,
+        }),
         config(),
       ]);
       const prioritizedSchedule = {
@@ -112,11 +114,11 @@ function UploadView({ onChange }: { onChange?: (schedule: Schedule) => void }) {
       );
       a.download = "schedule.json";
       a.click();
-    } catch (e: unknown) {
-      let message = "Неизвестная ошибка";
-      if (e instanceof Error) message = e.message;
-      else if (typeof e === "string") message = e;
-      alert("Ошибка при формировании: " + message);
+    } catch (e) {
+      setPctProgress(null);
+      alert(e);
+
+      throw e;
     } finally {
       setIsLoading(false);
     }
@@ -145,7 +147,7 @@ function UploadView({ onChange }: { onChange?: (schedule: Schedule) => void }) {
         disabled={isLoading}
         data-button
       >
-        {isLoading ? "Формируем" + dots : "Сформировать"}
+        {isLoading ? `Формируем ${pctProgress}%` : "Сформировать"}
       </button>
     </div>
   );

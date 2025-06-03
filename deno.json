@@ -9,6 +9,7 @@
     "@tauri-apps/plugin-os": "npm:@tauri-apps/plugin-os@^2.2.1",
     "cheerio": "npm:cheerio",
     "esbuild": "npm:esbuild",
+    "fetch-retry": "npm:fetch-retry@^6.0.0",
     "hono": "npm:hono",
     "vite": "npm:vite",
     "zod": "npm:zod"

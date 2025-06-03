@@ -15,6 +15,7 @@
     "npm:@types/node@*": "22.12.0",
     "npm:cheerio@*": "1.0.0",
     "npm:esbuild@*": "0.25.2",
+    "npm:fetch-retry@6": "6.0.0",
     "npm:hono@*": "4.7.7",
     "npm:vite@*": "6.3.2_picomatch@4.0.2_@types+node@22.12.0",
     "npm:vite@6.3.2": "6.3.2_picomatch@4.0.2_@types+node@22.12.0",
@@ -403,6 +404,9 @@
         "picomatch"
       ]
     },
+    "fetch-retry@6.0.0": {
+      "integrity": "sha512-BUFj1aMubgib37I3v4q78fYo63Po7t4HUPTpQ6/QE6yK6cIQrP+W43FYToeTEyg5m2Y7eFUtijUuAv/PDlWuag=="
+    },
     "fsevents@2.3.3": {
       "integrity": "sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw=="
     },
@@ -577,6 +581,7 @@
       "npm:@tauri-apps/plugin-os@^2.2.1",
       "npm:cheerio@*",
       "npm:esbuild@*",
+      "npm:fetch-retry@6",
       "npm:hono@*",
       "npm:vite@*",
       "npm:zod@*"
