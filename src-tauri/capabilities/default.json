@@ -5,6 +5,11 @@
   "windows": ["main"],
   "permissions": [
     "core:default",
+    "os:default",
+    "dialog:default",
+    "fs:default",
+    "fs:read-all",
+    "fs:write-all",
     {
       "identifier": "http:default",
       "allow": [
@@ -15,14 +20,6 @@
           "url": "http://*:*"
         }
       ]
-    },
-    {
-      "identifier": "fs:default",
-      "allow": [
-        { "path": "/etc/schedule/config.toml" },
-        { "path": "C:\\\\ProgramData\\Schedule\\config.toml" }
-      ]
-    },
-    "os:default"
+    }
   ]
 }
