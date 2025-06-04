@@ -1,5 +1,6 @@
 import * as cheerio from "cheerio";
 import retry from "fetch-retry";
+import { chunk } from "./utils/chunk.ts";
 
 export type Lesson = {
   time: string;
@@ -13,7 +14,11 @@ export type Lesson = {
 const WEBSITE_HOST = "https://www.smtu.ru";
 
 async function listSchedule(f: typeof fetch) {
-  const res = await f(`${WEBSITE_HOST}/ru/listschedule/`);
+  const res = await retry(f)(`${WEBSITE_HOST}/ru/listschedule/`, {
+    retries: 3,
+    retryDelay: 1000,
+    signal: AbortSignal.timeout(15000),
+  });
   const html = await res.text();
   const $ = cheerio.load(html);
 
@@ -31,19 +36,20 @@ function fetchSchedules(
 ) {
   const { onResponse } = options ?? {};
 
-  return Promise.all(hrefs.map(async (href) => {
+  return chunk(hrefs, 10, async (href) => {
     const group = href.replace(/[^0-9]/g, "");
 
     const res = await retry(f)(`${WEBSITE_HOST}${href}`, {
       retries: 3,
       retryDelay: 1000,
+      signal: AbortSignal.timeout(15000),
     });
     const html = await res.text();
 
     onResponse?.(res);
 
     return [group, cheerio.load(html)] as const;
-  }));
+  });
 }
 
 function parse(schedules: (readonly [string, cheerio.CheerioAPI])[]) {

@@ -8,6 +8,7 @@ import { useHistoryState } from "./reactive-history.ts";
 import { COMPUTER_ICON, PRIORITIZED_KEY_NAME } from "../constants.ts";
 import { fetch as tauriFetch } from "@tauri-apps/plugin-http";
 import { config } from "../config/tauri.ts";
+import { saveFile } from "../utils/save-file.ts";
 
 if (__ENV__ == "web") {
   addEventListener("load", async () => {
@@ -106,19 +107,16 @@ function UploadView({ onChange }: { onChange?: (schedule: Schedule) => void }) {
         lessons: schedule,
       });
 
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(
+      await saveFile(
         new Blob([JSON.stringify(prioritizedSchedule)], {
           type: "application/json",
         }),
+        "schedule.json",
       );
-      a.download = "schedule.json";
-      a.click();
     } catch (e) {
       setPctProgress(null);
       alert(e);
-
-      throw e;
+      console.error(e);
     } finally {
       setIsLoading(false);
     }
