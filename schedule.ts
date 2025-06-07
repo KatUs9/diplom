@@ -106,7 +106,7 @@ function transform(
             lesson;
 
           acc[building] ??= {};
-          acc[building][audience] ??= [];
+          acc[building][audience] ??= new Array(6);
           acc[building][audience][i] ??= [];
           acc[building][audience][i].push(
             {

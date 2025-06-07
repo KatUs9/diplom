@@ -23,7 +23,7 @@ const api = hc<Api>("/api");
 
 type Schedule = {
   audiences: Record<string, string[]>;
-  lessons: Record<string, Record<string, Lesson[][]>> | null;
+  lessons: Record<string, Record<string, (Lesson[] | null)[]>> | null;
 };
 
 const days = [
@@ -118,8 +118,8 @@ function UploadView({ onChange }: { onChange?: (schedule: Schedule) => void }) {
       }
     } catch (e) {
       setPctProgress(null);
-      alert(e);
       console.error(e);
+      alert("Сайт ВУЗа недоступен или отсутсвует интернет соединение.");
     } finally {
       setIsLoading(false);
     }
@@ -166,7 +166,7 @@ function ScheduleView(
     ),
   );
 
-  const audienceLessons = useHistoryState<Lesson[][] | null>();
+  const audienceLessons = useHistoryState<(Lesson[] | null)[] | null>();
 
   const handleShow = async () => {
     let l;
@@ -297,7 +297,7 @@ function ScheduleView(
                         <tr key={slot}>
                           <th scope="row">{slot.split("-")[0]}</th>
                           {audienceLessons.map((day, i) => {
-                            const l = day.find(({ time }) => time == slot);
+                            const l = day?.find(({ time }) => time == slot);
 
                             return (
                               <td key={i}>
