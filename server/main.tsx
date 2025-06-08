@@ -25,7 +25,7 @@ app.get("/", (c) => {
         <link rel="stylesheet" href="/css/styles.css" />
         <link rel="manifest" href="/web-manifest.json" />
         <script type="module" src="/js/bundle.js" />
-        <title>Hono</title>
+        <title>Расписание СПбГМТУ</title>
       </head>
       <body>
         <script

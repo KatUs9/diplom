@@ -314,7 +314,7 @@ function ScheduleView(
                                     <>
                                       {l.group}
                                       <br />
-                                      {teacher(l.teacher)}
+                                      {l.teacher && teacher(l.teacher)}
                                     </>
                                   )
                                   : null}
