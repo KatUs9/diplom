@@ -186,6 +186,12 @@ function ScheduleView(
   };
 
   const handleBack = () => {
+    setBuilding(buildings[0]);
+    setAudience(audiences[building][0].replace(
+      COMPUTER_ICON,
+      "",
+    ));
+
     history.replaceState(null, "", null);
   };
 
